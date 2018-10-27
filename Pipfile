@@ -1,0 +1,17 @@
+[[source]]
+url = "https://pypi.doubanio.com/simple/"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+flask = "*"
+flask-wtf = "*"
+flask-sqlalchemy = "*"
+cymysql = "*"
+flask-httpauth = "*"
+requests = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.6"
