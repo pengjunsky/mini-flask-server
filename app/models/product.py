@@ -1,9 +1,7 @@
 from sqlalchemy import Column, Integer, Float, String, SmallInteger
 from sqlalchemy import desc, asc
 
-
 from app.libs.error_code import ProductException
-
 
 from app.models.m2m import Product2Image
 from app.models.base import Base, db
@@ -22,7 +20,7 @@ class Product(Base):
     img_id = Column(Integer)
 
     def keys(self):
-        self.hide('_main_img_url', '_from', 'img_id').append('main_img_url', 'img_urls')
+        self.hide('_main_img_url', '_from', 'img_id').append('main_img_url')
         return self.fields
 
     @property
@@ -37,7 +35,6 @@ class Product(Base):
             return []
         return list(map(lambda x: x['img_url'], list(img_urls)))
 
-
     @staticmethod
     def get_most_recent(count):
         with db.auto_check_empty(ProductException):
@@ -51,4 +48,4 @@ class Product(Base):
     @staticmethod
     def get_product_detail(id):
         with db.auto_check_empty(ProductException):
-            return Product.query.filter_by(id=id).first_or_404().hide('category_id')
+            return Product.query.filter_by(id=id).first_or_404().hide('category_id').append('img_urls')

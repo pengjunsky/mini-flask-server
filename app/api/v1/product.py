@@ -10,6 +10,7 @@ api = RedPrint('product')
 def get_recent():
     count = Count().validate_for_api().count.data
     products = Product.get_most_recent(count=count)
+    # products = [product.hide('img_urls') for product in products]
     return jsonify(products)
 
 
