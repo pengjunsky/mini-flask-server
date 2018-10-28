@@ -4,19 +4,8 @@
     <bookmark url="file://$PROJECT_DIR$/app/validators/forms.py" line="38" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="99d85476-b00b-4417-b756-ce9171f294ca" name="默认的" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/api/v1/book.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/api/v1/gift.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/models/book.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/models/gift.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/mina.sql" afterPath="" />
+    <list default="true" id="99d85476-b00b-4417-b756-ce9171f294ca" name="默认的" comment="sql">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/api/v1/__init__.py" afterPath="$PROJECT_DIR$/app/api/v1/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/api/v1/product.py" afterPath="$PROJECT_DIR$/app/api/v1/product.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/setting.py" afterPath="$PROJECT_DIR$/app/config/setting.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/m2m.py" afterPath="$PROJECT_DIR$/app/models/m2m.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/product.py" afterPath="$PROJECT_DIR$/app/models/product.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/validators/forms.py" afterPath="$PROJECT_DIR$/app/validators/forms.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -185,6 +174,7 @@
         <option value="$PROJECT_DIR$/app/api/v1/__init__.py" />
         <option value="$PROJECT_DIR$/app/validators/forms.py" />
         <option value="$PROJECT_DIR$/app/config/setting.py" />
+        <option value="$PROJECT_DIR$/mall.sql" />
       </list>
     </option>
   </component>
@@ -223,11 +213,6 @@
             <path>
               <item name="mini-flask-server" type="b2602c69:ProjectViewProjectNode" />
               <item name="mini-flask-server" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mini-flask-server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mini-flask-server" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -348,7 +333,14 @@
       <option name="project" value="LOCAL" />
       <updated>1540690919153</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="更新">
+      <created>1540710652985</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1540710652985</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TodoView">
@@ -445,14 +437,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/api/v1/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="1" column="44" lean-forward="false" selection-start-line="1" selection-start-column="44" selection-end-line="1" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/product.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
@@ -713,6 +697,14 @@
     <entry file="file://$PROJECT_DIR$/app/static/images/product-dryfruit@1.png">
       <provider selected="true" editor-type-id="images">
         <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mall.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
+        </state>
       </provider>
     </entry>
   </component>
