@@ -7,10 +7,10 @@ from app.models.image import Image
 
 class BannerItem(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
-    banner_id = Column(Integer, ForeignKey('banner.id'))
+    banner_id = Column(Integer, ForeignKey('banner.id'), nullable=False)
     image = relationship('Image')
-    img_id = Column(Integer, ForeignKey('image.id'))
-    key_word = Column(String(100))
+    img_id = Column(Integer, ForeignKey('image.id'), nullable=False)
+    key_word = Column(String(100), nullable=False)
     type = Column(SmallInteger, default=1)
 
     def keys(self):

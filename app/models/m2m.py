@@ -8,7 +8,7 @@ class Product2Image(Base):
     __tablename__ = 'product_image'
     id = Column(Integer, primary_key=True, autoincrement=True)
     img_id = Column(Integer, ForeignKey('image.id'), nullable=False)
-    order = Column(Integer, nullable=False)
+    order = Column(Integer, nullable=False, default=0)
     product_id = Column(Integer, ForeignKey('product.id'), nullable=False)
 
     def keys(self):

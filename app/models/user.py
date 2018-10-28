@@ -8,7 +8,7 @@ from app.service.user_token import UserToken
 
 
 class User(Base):
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
     openid = Column(String(50), unique=True)
     email = Column(String(24), unique=True)
     nickname = Column(String(24))

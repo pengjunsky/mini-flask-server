@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50720
 File Encoding         : 65001
 
-Date: 2018-10-28 15:07:14
+Date: 2018-10-28 21:34:06
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -179,7 +179,7 @@ CREATE TABLE `product` (
   `category_id` int(11) DEFAULT NULL,
   `main_img_url` varchar(255) DEFAULT NULL COMMENT '主图ID号，这是一个反范式设计，有一定的冗余',
   `from` tinyint(4) NOT NULL DEFAULT '1' COMMENT '图片来自 1 本地 ，2公网',
-  `create_time` int(11) DEFAULT NULL COMMENT '创建时间',
+  `create_time` int(11) NOT NULL COMMENT '创建时间',
   `update_time` int(11) DEFAULT NULL,
   `summary` varchar(50) DEFAULT NULL COMMENT '摘要',
   `img_id` int(11) DEFAULT NULL COMMENT '图片外键',

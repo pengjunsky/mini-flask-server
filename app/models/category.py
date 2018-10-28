@@ -7,8 +7,8 @@ from app.models.base import Base, db
 
 class Category(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String(50))
-    topic_img_id = Column(Integer, ForeignKey('image.id'))
+    name = Column(String(50), nullable=False)
+    topic_img_id = Column(Integer, ForeignKey('image.id'), nullable=False)
     image = relationship('Image', foreign_keys=[topic_img_id])
 
     def keys(self):

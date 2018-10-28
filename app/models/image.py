@@ -5,7 +5,7 @@ from app.models.base import Base
 
 class Image(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
-    _url = Column('url', String(255))
+    _url = Column('url', String(255), nullable=False)
     _from = Column('from', SmallInteger, default=1)  # 1表示存在本地, 2表示存在网络上
 
     def keys(self):

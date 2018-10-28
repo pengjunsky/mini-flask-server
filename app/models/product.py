@@ -1,6 +1,6 @@
-from sqlalchemy import Column, Integer, Float, String, SmallInteger
+from sqlalchemy import Column, Integer, String, SmallInteger
 from sqlalchemy import desc, asc
-
+from sqlalchemy.dialects.mysql import FLOAT
 from app.libs.error_code import ProductException
 
 from app.models.m2m import Product2Image
@@ -10,10 +10,10 @@ from app.models.base import Base, db
 class Product(Base):
     __tablename__ = 'product'
     id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String(50))
-    price = Column(Float)
-    stock = Column(Integer)
-    category_id = Column(Integer)
+    name = Column(String(80), nullable=False)
+    price = Column(FLOAT(precision=6, scale=2), nullable=False)
+    stock = Column(Integer, default=0, nullable=False)
+    category_id = Column(Integer, nullable=False)
     _main_img_url = Column('main_img_url', String(255))
     _from = Column('from', SmallInteger, default=1)
     summary = Column(String(50))
