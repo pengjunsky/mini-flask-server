@@ -29,10 +29,6 @@ class UserEmailValidator(ClientValidator):
             raise ValidationError(message='The account already exists')
 
 
-class BookSearchValidator(BaseValidator):
-    q = StringField(validators=[DataRequired()])
-
-
 class TokenValidator(BaseValidator):
     token = StringField(validators=[DataRequired()])
 

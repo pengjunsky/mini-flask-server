@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, Float, String, SmallInteger
 from sqlalchemy import desc, asc
-from sqlalchemy.orm import relationship, backref
+
 
 from app.libs.error_code import ProductException
 
@@ -20,7 +20,6 @@ class Product(Base):
     _from = Column('from', SmallInteger, default=1)
     summary = Column(String(50))
     img_id = Column(Integer)
-    # theme = relationship('Theme', secondary='theme_product', backref=backref('product', lazy='dynamic'))
 
     def keys(self):
         self.hide('_main_img_url', '_from', 'img_id').append('main_img_url', 'img_urls')

@@ -18,3 +18,11 @@ class Product2Image(Base):
     @property
     def img_url(self):
         return Image.get_img_by_id(id=self.img_id).url
+
+
+class Product2Property(Base):
+    __tablename__ = 'product_property'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String(30))
+    detail = Column(String(255), nullable=False)
+    product_id = Column(Integer, ForeignKey('product.id'), nullable=False)
