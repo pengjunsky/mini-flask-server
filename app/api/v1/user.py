@@ -30,7 +30,7 @@ def get_user():
 def super_delete_user(uid):
     with db.auto_commit():
         user = User.query.filter_by(id=uid).first_or_404()
-        user.delete()
+        db.session.delete(user)
     return DeleteSuccess()
 
 
@@ -40,7 +40,7 @@ def delete_user():
     uid = g.user.uid
     with db.auto_commit():
         user = User.query.filter_by(id=uid).first_or_404()
-        user.delete()
+        db.session.delete(user)
     return DeleteSuccess()
 
 

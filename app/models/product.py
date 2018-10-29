@@ -12,7 +12,8 @@ class Product(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(80), nullable=False)
     price = Column(FLOAT(precision=6, scale=2), nullable=False)
-    stock = Column(Integer, default=0, nullable=False)
+    stock = Column(Integer, default=0)
+    sale = Column(Integer, default=0)
     category_id = Column(Integer, nullable=False)
     _main_img_url = Column('main_img_url', String(255))
     _from = Column('from', SmallInteger, default=1)
@@ -38,12 +39,16 @@ class Product(Base):
     @staticmethod
     def get_most_recent(count):
         with db.auto_check_empty(ProductException):
-            return Product.query.order_by(desc(Product.create_time)).limit(count).all()
+            products = Product.query.order_by(desc(Product.create_time)).limit(count).all()
+            products = [product.hide('category_id', 'stock', 'summary') for product in products]
+            return products
 
     @staticmethod
     def get_product_by_category_id(id):
         with db.auto_check_empty(ProductException):
-            return Product.query.filter_by(category_id=id).all()
+            products = Product.query.filter_by(category_id=id).all()
+            products = [product.hide('category_id', 'stock', 'summary') for product in products]
+            return products
 
     @staticmethod
     def get_product_detail(id):
