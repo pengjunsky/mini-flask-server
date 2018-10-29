@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from flask import current_app, jsonify
 
 from app.libs.enums import ClientTypeEnum
@@ -40,8 +42,8 @@ def get_token_info():
 
     r = {
         'scope': data[0]['scope'],
-        'create_at': data[1]['iat'],  # 创建时间
-        'expire_in': data[1]['exp'],  # 有效期
+        'create_at': datetime.fromtimestamp(data[1]['iat']),  # 创建时间
+        'expire_in': datetime.fromtimestamp(data[1]['exp']),  # 有效期
         'uid': data[0]['uid']
     }
     return jsonify(r)

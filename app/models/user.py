@@ -17,7 +17,7 @@ class User(Base):
     _password = Column('password', String(100))
 
     def keys(self):
-        self.hide('openid', '_password').append('create_datetime')
+        self.hide('openid', '_password')
         return self.fields
 
     @property
