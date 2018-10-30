@@ -13,7 +13,7 @@ class Banner(Base):
     _items = relationship('BannerItem', backref='author', lazy='dynamic')
 
     def keys(self):
-        self.append('items')
+        self.hide('description', 'name', 'id').append('items')
         return self.fields
 
     @property

@@ -14,10 +14,10 @@ class IDMustBePositiveInt(BaseValidator):
 
 
 class Count(BaseValidator):
-    count = IntegerField(default='15')
+    count = IntegerField(default='20')
 
     def validate_count(self, value):
         count = value.data
-        if not self.isPositiveInteger(count) or not (1 <= int(count) <= 15):
-            raise ValidationError(message='count必须是[1, 15]区间内 的正整数')
+        if not self.isPositiveInteger(count) or not (1 <= int(count) <= 20):
+            raise ValidationError(message='count必须是[1, 20]区间内 的正整数')
         self.count.data = int(count)
