@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50720
 File Encoding         : 65001
 
-Date: 2018-10-29 22:12:04
+Date: 2018-10-30 21:59:49
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -169,50 +169,48 @@ CREATE TABLE `product` (
   `sale` int(11) NOT NULL DEFAULT '0' COMMENT '销量',
   `stock` int(11) NOT NULL DEFAULT '0' COMMENT '库存量',
   `category_id` int(11) DEFAULT NULL,
-  `main_img_url` varchar(255) DEFAULT NULL COMMENT '主图ID号，这是一个反范式设计，有一定的冗余',
-  `from` tinyint(4) NOT NULL DEFAULT '1' COMMENT '图片来自 1 本地 ，2公网',
   `create_time` int(11) NOT NULL COMMENT '创建时间',
   `update_time` int(11) DEFAULT NULL,
   `summary` varchar(50) DEFAULT NULL COMMENT '摘要',
-  `img_id` int(11) DEFAULT NULL COMMENT '图片外键',
+  `main_img_id` int(11) DEFAULT NULL COMMENT '图片外键',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of product
 -- ----------------------------
-INSERT INTO `product` VALUES ('1', '芹菜 半斤', '0.01', '0', '998', '3', '/product-vg@1.png', '1', '1528938338', null, null, '13');
-INSERT INTO `product` VALUES ('2', '梨花带雨 3个', '0.01', '0', '984', '2', '/product-dryfruit@1.png', '1', '1528938339', null, null, '10');
-INSERT INTO `product` VALUES ('3', '素米 327克', '0.01', '0', '996', '7', '/product-rice@1.png', '1', '1528938340', null, null, '31');
-INSERT INTO `product` VALUES ('4', '红袖枸杞 6克*3袋', '0.01', '0', '998', '6', '/product-tea@1.png', '1', '1528938341', null, null, '32');
-INSERT INTO `product` VALUES ('5', '春生龙眼 500克', '0.01', '0', '995', '2', '/product-dryfruit@2.png', '1', '1528938342', null, null, '33');
-INSERT INTO `product` VALUES ('6', '小红的猪耳朵 120克', '0.01', '0', '997', '5', '/product-cake@2.png', '1', '1528938343', null, null, '53');
-INSERT INTO `product` VALUES ('7', '泥蒿 半斤', '0.01', '0', '998', '3', '/product-vg@2.png', '1', '1528938344', null, null, '68');
-INSERT INTO `product` VALUES ('8', '夏日芒果 3个', '0.01', '0', '995', '2', '/product-dryfruit@3.png', '1', '1528938345', null, null, '36');
-INSERT INTO `product` VALUES ('9', '冬木红枣 500克', '0.01', '0', '996', '2', '/product-dryfruit@4.png', '1', '1528938346', null, null, '37');
-INSERT INTO `product` VALUES ('10', '万紫千凤梨 300克', '0.01', '0', '996', '2', '/product-dryfruit@5.png', '1', '1528938347', null, null, '38');
-INSERT INTO `product` VALUES ('11', '贵妃笑 100克', '0.01', '0', '994', '2', '/product-dryfruit-a@6.png', '1', '1528938369', null, null, '39');
-INSERT INTO `product` VALUES ('12', '珍奇异果 3个', '0.01', '0', '999', '2', '/product-dryfruit@7.png', '1', '1528938349', null, null, '40');
-INSERT INTO `product` VALUES ('13', '绿豆 125克', '0.01', '0', '999', '7', '/product-rice@2.png', '1', '1528938350', null, null, '41');
-INSERT INTO `product` VALUES ('14', '芝麻 50克', '0.01', '0', '999', '7', '/product-rice@3.png', '1', '1528938351', null, null, '42');
-INSERT INTO `product` VALUES ('15', '猴头菇 370克', '0.01', '0', '999', '7', '/product-rice@4.png', '1', '1528938352', null, null, '43');
-INSERT INTO `product` VALUES ('16', '西红柿 1斤', '0.01', '0', '999', '3', '/product-vg@3.png', '1', '1528938353', null, null, '69');
-INSERT INTO `product` VALUES ('17', '油炸花生 300克', '0.01', '0', '999', '4', '/product-fry@1.png', '1', '1528938354', null, null, '44');
-INSERT INTO `product` VALUES ('18', '春泥西瓜子 128克', '0.01', '0', '997', '4', '/product-fry@2.png', '1', '1528938355', null, null, '45');
-INSERT INTO `product` VALUES ('19', '碧水葵花籽 128克', '0.01', '0', '999', '4', '/product-fry@3.png', '1', '1528938356', null, null, '46');
-INSERT INTO `product` VALUES ('20', '碧螺春 12克*3袋', '0.01', '0', '999', '6', '/product-tea@2.png', '1', '1528938357', null, null, '47');
-INSERT INTO `product` VALUES ('21', '西湖龙井 8克*3袋', '0.01', '0', '998', '6', '/product-tea@3.png', '1', '1528938358', null, null, '48');
-INSERT INTO `product` VALUES ('22', '梅兰清花糕 1个', '0.01', '0', '997', '5', '/product-cake-a@3.png', '1', '1528938359', null, null, '54');
-INSERT INTO `product` VALUES ('23', '清凉薄荷糕 1个', '0.01', '0', '998', '5', '/product-cake-a@4.png', '1', '1528938360', null, null, '55');
-INSERT INTO `product` VALUES ('25', '小明的妙脆角 120克', '0.01', '0', '999', '5', '/product-cake@1.png', '1', '1528938361', null, null, '52');
-INSERT INTO `product` VALUES ('26', '红衣青瓜 混搭160克', '0.01', '0', '999', '2', '/product-dryfruit@8.png', '1', '1528938362', null, null, '56');
-INSERT INTO `product` VALUES ('27', '锈色瓜子 100克', '0.01', '0', '998', '4', '/product-fry@4.png', '1', '1528938363', null, null, '57');
-INSERT INTO `product` VALUES ('28', '春泥花生 200克', '0.01', '0', '999', '4', '/product-fry@5.png', '1', '1528938364', null, null, '58');
-INSERT INTO `product` VALUES ('29', '冰心鸡蛋 2个', '0.01', '0', '999', '7', '/product-rice@5.png', '1', '1528938365', null, null, '59');
-INSERT INTO `product` VALUES ('30', '八宝莲子 200克', '0.01', '0', '999', '7', '/product-rice@6.png', '1', '1528938366', null, null, '14');
-INSERT INTO `product` VALUES ('31', '深涧木耳 78克', '0.01', '0', '999', '7', '/product-rice@7.png', '1', '1528938367', null, null, '60');
-INSERT INTO `product` VALUES ('32', '土豆 半斤', '0.01', '0', '999', '3', '/product-vg@4.png', '1', '1528938368', null, null, '66');
-INSERT INTO `product` VALUES ('33', '青椒 半斤', '0.01', '0', '999', '3', '/product-vg@5.png', '1', '1528938369', null, null, '67');
+INSERT INTO `product` VALUES ('1', '芹菜 半斤', '0.01', '0', '998', '3', '1528938338', null, null, '13');
+INSERT INTO `product` VALUES ('2', '梨花带雨 3个', '0.01', '0', '984', '2', '1528938339', null, null, '10');
+INSERT INTO `product` VALUES ('3', '素米 327克', '0.01', '0', '996', '7', '1528938340', null, null, '31');
+INSERT INTO `product` VALUES ('4', '红袖枸杞 6克*3袋', '0.01', '0', '998', '6', '1528938341', null, null, '32');
+INSERT INTO `product` VALUES ('5', '春生龙眼 500克', '0.01', '0', '995', '2', '1528938342', null, null, '33');
+INSERT INTO `product` VALUES ('6', '小红的猪耳朵 120克', '0.01', '0', '997', '5', '1528938343', null, null, '53');
+INSERT INTO `product` VALUES ('7', '泥蒿 半斤', '0.01', '0', '998', '3', '1528938344', null, null, '68');
+INSERT INTO `product` VALUES ('8', '夏日芒果 3个', '0.01', '0', '995', '2', '1528938345', null, null, '36');
+INSERT INTO `product` VALUES ('9', '冬木红枣 500克', '0.01', '0', '996', '2', '1528938346', null, null, '37');
+INSERT INTO `product` VALUES ('10', '万紫千凤梨 300克', '0.01', '0', '996', '2', '1528938347', null, null, '38');
+INSERT INTO `product` VALUES ('11', '贵妃笑 100克', '0.01', '0', '994', '2', '1528938369', null, null, '39');
+INSERT INTO `product` VALUES ('12', '珍奇异果 3个', '0.01', '0', '999', '2', '1528938349', null, null, '40');
+INSERT INTO `product` VALUES ('13', '绿豆 125克', '0.01', '0', '999', '7', '1528938350', null, null, '41');
+INSERT INTO `product` VALUES ('14', '芝麻 50克', '0.01', '0', '999', '7', '1528938351', null, null, '42');
+INSERT INTO `product` VALUES ('15', '猴头菇 370克', '0.01', '0', '999', '7', '1528938352', null, null, '43');
+INSERT INTO `product` VALUES ('16', '西红柿 1斤', '0.01', '0', '999', '3', '1528938353', null, null, '69');
+INSERT INTO `product` VALUES ('17', '油炸花生 300克', '0.01', '0', '999', '4', '1528938354', null, null, '44');
+INSERT INTO `product` VALUES ('18', '春泥西瓜子 128克', '0.01', '0', '997', '4', '1528938355', null, null, '45');
+INSERT INTO `product` VALUES ('19', '碧水葵花籽 128克', '0.01', '0', '999', '4', '1528938356', null, null, '46');
+INSERT INTO `product` VALUES ('20', '碧螺春 12克*3袋', '0.01', '0', '999', '6', '1528938357', null, null, '47');
+INSERT INTO `product` VALUES ('21', '西湖龙井 8克*3袋', '0.01', '0', '998', '6', '1528938358', null, null, '48');
+INSERT INTO `product` VALUES ('22', '梅兰清花糕 1个', '0.01', '0', '997', '5', '1528938359', null, null, '54');
+INSERT INTO `product` VALUES ('23', '清凉薄荷糕 1个', '0.01', '0', '998', '5', '1528938360', null, null, '55');
+INSERT INTO `product` VALUES ('25', '小明的妙脆角 120克', '0.01', '0', '999', '5', '1528938361', null, null, '52');
+INSERT INTO `product` VALUES ('26', '红衣青瓜 混搭160克', '0.01', '0', '999', '2', '1528938362', null, null, '56');
+INSERT INTO `product` VALUES ('27', '锈色瓜子 100克', '0.01', '0', '998', '4', '1528938363', null, null, '57');
+INSERT INTO `product` VALUES ('28', '春泥花生 200克', '0.01', '0', '999', '4', '1528938364', null, null, '58');
+INSERT INTO `product` VALUES ('29', '冰心鸡蛋 2个', '0.01', '0', '999', '7', '1528938365', null, null, '59');
+INSERT INTO `product` VALUES ('30', '八宝莲子 200克', '0.01', '0', '999', '7', '1528938366', null, null, '14');
+INSERT INTO `product` VALUES ('31', '深涧木耳 78克', '0.01', '0', '999', '7', '1528938367', null, null, '60');
+INSERT INTO `product` VALUES ('32', '土豆 半斤', '0.01', '0', '999', '3', '1528938368', null, null, '66');
+INSERT INTO `product` VALUES ('33', '青椒 半斤', '0.01', '0', '999', '3', '1528938369', null, null, '67');
 
 -- ----------------------------
 -- Table structure for `product_image`
