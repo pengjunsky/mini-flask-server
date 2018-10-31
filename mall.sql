@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50720
 File Encoding         : 65001
 
-Date: 2018-10-30 21:59:49
+Date: 2018-10-31 21:50:58
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -221,27 +221,29 @@ CREATE TABLE `product_image` (
   `img_id` int(11) NOT NULL COMMENT '外键，关联图片表',
   `order` int(11) NOT NULL DEFAULT '0' COMMENT '图片排序序号',
   `product_id` int(11) NOT NULL COMMENT '商品id，外键',
+  `type` tinyint(4) NOT NULL DEFAULT '0' COMMENT '图片类型 0，轮播展示图；1：详情图',
   `create_time` int(11) DEFAULT NULL,
   `update_time` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of product_image
 -- ----------------------------
-INSERT INTO `product_image` VALUES ('4', '19', '1', '11', null, null);
-INSERT INTO `product_image` VALUES ('5', '20', '2', '11', null, null);
-INSERT INTO `product_image` VALUES ('6', '21', '3', '11', null, null);
-INSERT INTO `product_image` VALUES ('7', '22', '4', '11', null, null);
-INSERT INTO `product_image` VALUES ('8', '23', '5', '11', null, null);
-INSERT INTO `product_image` VALUES ('9', '24', '6', '11', null, null);
-INSERT INTO `product_image` VALUES ('10', '25', '7', '11', null, null);
-INSERT INTO `product_image` VALUES ('11', '26', '8', '11', null, null);
-INSERT INTO `product_image` VALUES ('12', '27', '9', '11', null, null);
-INSERT INTO `product_image` VALUES ('13', '28', '11', '11', null, null);
-INSERT INTO `product_image` VALUES ('14', '29', '10', '11', null, null);
-INSERT INTO `product_image` VALUES ('18', '62', '12', '11', null, null);
-INSERT INTO `product_image` VALUES ('19', '63', '13', '11', null, null);
+INSERT INTO `product_image` VALUES ('4', '19', '1', '11', '1', null, null);
+INSERT INTO `product_image` VALUES ('5', '20', '2', '11', '1', null, null);
+INSERT INTO `product_image` VALUES ('6', '21', '3', '11', '1', null, null);
+INSERT INTO `product_image` VALUES ('7', '22', '4', '11', '1', null, null);
+INSERT INTO `product_image` VALUES ('8', '23', '5', '11', '1', null, null);
+INSERT INTO `product_image` VALUES ('9', '24', '6', '11', '1', null, null);
+INSERT INTO `product_image` VALUES ('10', '25', '7', '11', '1', null, null);
+INSERT INTO `product_image` VALUES ('11', '26', '8', '11', '1', null, null);
+INSERT INTO `product_image` VALUES ('12', '27', '9', '11', '1', null, null);
+INSERT INTO `product_image` VALUES ('13', '28', '11', '11', '1', null, null);
+INSERT INTO `product_image` VALUES ('14', '29', '10', '11', '1', null, null);
+INSERT INTO `product_image` VALUES ('18', '62', '12', '11', '1', null, null);
+INSERT INTO `product_image` VALUES ('19', '63', '13', '11', '1', null, null);
+INSERT INTO `product_image` VALUES ('20', '39', '1', '11', '0', null, null);
 
 -- ----------------------------
 -- Table structure for `product_property`

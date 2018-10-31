@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey, SmallInteger
 
 from app.models.base import Base
 from app.models.image import Image
@@ -10,9 +10,10 @@ class Product2Image(Base):
     img_id = Column(Integer, ForeignKey('image.id'), nullable=False)
     order = Column(Integer, nullable=False, default=0)
     product_id = Column(Integer, ForeignKey('product.id'), nullable=False)
+    type = Column(SmallInteger, default=0)
 
     def keys(self):
-        self.hide('id', 'img_id', 'product_id', 'order').append('img_url')
+        self.hide('id', 'img_id', 'product_id', 'order', 'type').append('img_url')
         return self.fields
 
     @property

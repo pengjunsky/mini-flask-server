@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, SmallInteger, ForeignKey
+from sqlalchemy import Column, Integer, String, SmallInteger, ForeignKey, and_
 from sqlalchemy import desc, asc
 from sqlalchemy.dialects.mysql import FLOAT
 from sqlalchemy.orm import relationship
@@ -25,14 +25,25 @@ class Product(Base):
         self.hide('main_img_id').append('main_img')
         return self.fields
 
-
     @property
-    def img_urls(self):
+    def detail_img(self):
         try:
-            img_urls = Product2Image.query.filter_by(product_id=self.id).order_by(asc(Product2Image.order)).all()
+            detail_img= Product2Image.query.filter(
+                and_(Product2Image.product_id == self.id, Product2Image.type == 1)) \
+                .order_by(asc(Product2Image.order)).all()
         except Exception:
             return []
-        return list(map(lambda x: x['img_url'], list(img_urls)))
+        return list(map(lambda x: x['img_url'], list(detail_img)))
+
+    @property
+    def banner_img(self):
+        try:
+            banner_img = Product2Image.query.filter(
+                and_(Product2Image.product_id == self.id, Product2Image.type == 0)) \
+                .order_by(asc(Product2Image.order)).all()
+        except Exception:
+            return []
+        return list(map(lambda x: x['img_url'], list(banner_img)))
 
     @staticmethod
     def get_most_recent(count):
@@ -51,4 +62,4 @@ class Product(Base):
     @staticmethod
     def get_product_detail(id):
         with db.auto_check_empty(ProductException):
-            return Product.query.filter_by(id=id).first_or_404().hide('category_id').append('img_urls')
+            return Product.query.filter_by(id=id).first_or_404().hide('category_id').append('detail_img','banner_img')
