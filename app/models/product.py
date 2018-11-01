@@ -4,8 +4,9 @@ from sqlalchemy.dialects.mysql import FLOAT
 from sqlalchemy.orm import relationship
 
 from app.libs.error_code import ProductException
+from app.models.image import Image
 
-from app.models.m2m import Product2Image
+from app.models.product_image import Product2Image
 from app.models.base import Base, db
 
 
@@ -19,16 +20,21 @@ class Product(Base):
     category_id = Column(Integer, nullable=False)
     summary = Column(String(50))
     main_img_id = Column(Integer, ForeignKey('image.id'), nullable=False)
-    main_img = relationship('Image', foreign_keys=[main_img_id])
+
+    # main_img = relationship('Image', foreign_keys=[main_img_id])
 
     def keys(self):
         self.hide('main_img_id').append('main_img')
         return self.fields
 
     @property
+    def main_img(self):
+        return Image.get_img_by_id(self.main_img_id).url
+
+    @property
     def detail_img(self):
         try:
-            detail_img= Product2Image.query.filter(
+            detail_img = Product2Image.query.filter(
                 and_(Product2Image.product_id == self.id, Product2Image.type == 1)) \
                 .order_by(asc(Product2Image.order)).all()
         except Exception:
@@ -62,4 +68,4 @@ class Product(Base):
     @staticmethod
     def get_product_detail(id):
         with db.auto_check_empty(ProductException):
-            return Product.query.filter_by(id=id).first_or_404().hide('category_id').append('detail_img','banner_img')
+            return Product.query.filter_by(id=id).first_or_404().hide('category_id').append('detail_img', 'banner_img')
