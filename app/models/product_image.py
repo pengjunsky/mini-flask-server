@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, SmallInteger
+from sqlalchemy import Column, Integer, ForeignKey, SmallInteger
 
 from app.models.base import Base
 from app.models.image import Image
