@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50720
 File Encoding         : 65001
 
-Date: 2018-10-31 21:50:58
+Date: 2018-11-04 21:20:12
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -250,26 +250,23 @@ INSERT INTO `product_image` VALUES ('20', '39', '1', '11', '0', null, null);
 -- ----------------------------
 DROP TABLE IF EXISTS `product_property`;
 CREATE TABLE `product_property` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(30) DEFAULT '' COMMENT '详情属性名称',
-  `detail` varchar(255) NOT NULL COMMENT '详情属性',
-  `product_id` int(11) NOT NULL COMMENT '商品id，外键',
-  `update_time` int(11) DEFAULT NULL,
   `create_time` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
+  `update_time` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) NOT NULL COMMENT '属性名',
+  `price` float(6,2) NOT NULL COMMENT '价格',
+  `stock` int(11) NOT NULL DEFAULT '0' COMMENT '库存',
+  `product_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `product_id` (`product_id`),
+  CONSTRAINT `product_property_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of product_property
 -- ----------------------------
-INSERT INTO `product_property` VALUES ('1', '品名', '杨梅', '11', null, null);
-INSERT INTO `product_property` VALUES ('2', '口味', '青梅味 雪梨味 黄桃味 菠萝味', '11', null, null);
-INSERT INTO `product_property` VALUES ('3', '产地', '火星', '11', null, null);
-INSERT INTO `product_property` VALUES ('4', '保质期', '180天', '11', null, null);
-INSERT INTO `product_property` VALUES ('5', '品名', '梨子', '2', null, null);
-INSERT INTO `product_property` VALUES ('6', '产地', '金星', '2', null, null);
-INSERT INTO `product_property` VALUES ('7', '净含量', '100g', '2', null, null);
-INSERT INTO `product_property` VALUES ('8', '保质期', '10天', '2', null, null);
+INSERT INTO `product_property` VALUES (null, null, '1', '500g', '0.10', '11', '11');
+INSERT INTO `product_property` VALUES (null, null, '2', '1000g', '0.10', '111', '11');
 
 -- ----------------------------
 -- Table structure for `user`
