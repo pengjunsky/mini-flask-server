@@ -8,6 +8,7 @@ from app.models.image import Image
 
 from app.models.product_image import Product2Image
 from app.models.base import Base, db
+from app.models.product_property import Product2Property
 
 
 class Product(Base):
@@ -51,6 +52,14 @@ class Product(Base):
             return []
         return list(map(lambda x: x['img_url'], list(banner_img)))
 
+    @property
+    def property(self):
+        try:
+            property = Product2Property.query.filter_by(product_id=self.id).all()
+        except Exception:
+            return []
+        return property
+
     @staticmethod
     def get_most_recent(count):
         with db.auto_check_empty(ProductException):
@@ -68,4 +77,5 @@ class Product(Base):
     @staticmethod
     def get_product_detail(id):
         with db.auto_check_empty(ProductException):
-            return Product.query.filter_by(id=id).first_or_404().hide('category_id').append('detail_img', 'banner_img')
+            return Product.query.filter_by(id=id).first_or_404()\
+                .hide('category_id').append('detail_img', 'banner_img', 'property')
