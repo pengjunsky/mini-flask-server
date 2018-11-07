@@ -69,8 +69,11 @@ class Product(Base):
     def get_product_by_category_id(id):
         with db.auto_check_empty(ProductException):
             products = Product.query.filter_by(category_id=id).all()
-            products = [product.hide('category_id', 'content') for product in products]
-            return products
+            if products:
+                products = [product.hide('category_id', 'content') for product in products]
+                return products
+            else:
+                return None
 
     @staticmethod
     def get_product_detail(id):

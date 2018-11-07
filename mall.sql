@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost_3306
-Source Server Version : 50720
+Source Server         : localhost
+Source Server Version : 50505
 Source Host           : localhost:3306
 Source Database       : mall
 
 Target Server Type    : MYSQL
-Target Server Version : 50720
+Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2018-11-06 21:35:37
+Date: 2018-11-07 15:59:52
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -64,21 +64,21 @@ CREATE TABLE `category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL COMMENT '分类名称',
   `topic_img_id` int(11) DEFAULT NULL COMMENT '外键，关联image表',
-  `description` varchar(100) DEFAULT NULL COMMENT '描述',
   `update_time` int(11) DEFAULT NULL,
   `create_time` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COMMENT='商品类目';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COMMENT='商品类目';
 
 -- ----------------------------
 -- Records of category
 -- ----------------------------
-INSERT INTO `category` VALUES ('2', '果味', '6', null, null, null);
-INSERT INTO `category` VALUES ('3', '蔬菜', '5', null, null, null);
-INSERT INTO `category` VALUES ('4', '炒货', '7', null, null, null);
-INSERT INTO `category` VALUES ('5', '点心', '4', null, null, null);
-INSERT INTO `category` VALUES ('6', '粗茶', '8', null, null, null);
-INSERT INTO `category` VALUES ('7', '淡饭', '9', null, null, null);
+INSERT INTO `category` VALUES ('2', '果味', '6', null, null);
+INSERT INTO `category` VALUES ('3', '蔬菜', '5', null, null);
+INSERT INTO `category` VALUES ('4', '炒货', '7', null, null);
+INSERT INTO `category` VALUES ('5', '点心', '4', null, null);
+INSERT INTO `category` VALUES ('6', '粗茶', '8', null, null);
+INSERT INTO `category` VALUES ('7', '淡饭', '9', null, null);
+INSERT INTO `category` VALUES ('8', '肉食', null, null, null);
 
 -- ----------------------------
 -- Table structure for `image`
