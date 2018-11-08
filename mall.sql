@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50720
 File Encoding         : 65001
 
-Date: 2018-11-07 21:04:04
+Date: 2018-11-08 23:10:58
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -55,6 +55,31 @@ INSERT INTO `banner_item` VALUES ('1', '65', '6', '1', '1', null, '1528938338');
 INSERT INTO `banner_item` VALUES ('2', '2', '25', '1', '1', null, '1528938338');
 INSERT INTO `banner_item` VALUES ('3', '3', '11', '1', '1', null, '1528938338');
 INSERT INTO `banner_item` VALUES ('5', '1', '10', '1', '1', null, '1528938338');
+
+-- ----------------------------
+-- Table structure for `cart`
+-- ----------------------------
+DROP TABLE IF EXISTS `cart`;
+CREATE TABLE `cart` (
+  `create_time` int(11) DEFAULT NULL,
+  `update_time` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_id` int(11) NOT NULL COMMENT '商品ID',
+  `property_id` int(11) NOT NULL COMMENT '属性ID',
+  `uid` int(11) NOT NULL COMMENT '用户ID',
+  `number` int(11) DEFAULT '1' COMMENT '数量',
+  PRIMARY KEY (`id`),
+  KEY `product_id` (`product_id`),
+  KEY `property_id` (`property_id`),
+  CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
+  CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`property_id`) REFERENCES `product_property` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of cart
+-- ----------------------------
+INSERT INTO `cart` VALUES (null, null, '1', '11', '1', '1', '1');
+INSERT INTO `cart` VALUES (null, null, '3', '11', '1', '1', '1');
 
 -- ----------------------------
 -- Table structure for `category`

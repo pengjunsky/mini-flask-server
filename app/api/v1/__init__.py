@@ -1,5 +1,5 @@
 from flask import Blueprint
-from app.api.v1 import user, client, token, banner, category, product
+from app.api.v1 import user, client, token, banner, category, product, cart
 
 
 def create_blueprint_v1():
@@ -10,4 +10,5 @@ def create_blueprint_v1():
     banner.api.register(bp_v1)
     category.api.register(bp_v1)
     product.api.register(bp_v1)
+    cart.api.register(bp_v1)
     return bp_v1

@@ -24,7 +24,7 @@ class Product(Base):
     postage = Column(Integer, default=0)
 
     def keys(self):
-        self.hide('main_img_id').append('main_img')
+        self.hide('main_img_id', 'content', 'category_id').append('main_img')
         return self.fields
 
     @property
@@ -63,7 +63,7 @@ class Product(Base):
     def get_most_recent(count):
         with db.auto_check_empty(ProductException):
             products = Product.query.order_by(desc(Product.create_time)).limit(count).all()
-            products = [product.hide('category_id', 'content', 'postage') for product in products]
+            products = [product.hide('postage') for product in products]
             return products
 
     @staticmethod
@@ -71,7 +71,7 @@ class Product(Base):
         with db.auto_check_empty(ProductException):
             products = Product.query.filter_by(category_id=id).all()
             if products:
-                products = [product.hide('category_id', 'content', 'postage') for product in products]
+                products = [product.hide('postage') for product in products]
                 return products
             else:
                 return None
@@ -80,4 +80,4 @@ class Product(Base):
     def get_product_detail(id):
         with db.auto_check_empty(ProductException):
             return Product.query.filter_by(id=id).first_or_404() \
-                .hide('category_id').append('detail_img', 'banner_img', 'property')
+                .append('detail_img', 'banner_img', 'property', 'content', )

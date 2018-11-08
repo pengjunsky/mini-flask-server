@@ -2,7 +2,6 @@ from app.libs.error_code import DeleteSuccess, RenewSuccess
 from app.libs.redprint import RedPrint
 from app.libs.token_auth import auth
 from app.models.base import db
-from app.models.image import Image
 from app.models.user import User
 from flask import jsonify, g
 
