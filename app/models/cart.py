@@ -10,7 +10,7 @@ from app.models.product_property import Product2Property
 class Cart(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     product_id = Column(Integer, ForeignKey('product.id'), nullable=False)
-    property_id = Column(Integer, ForeignKey('product_property.id'), nullable=False)
+    property_id = Column(Integer, ForeignKey('product_property.id'))
     uid = Column(Integer, nullable=False)
     number = Column(Integer, default=1)
 

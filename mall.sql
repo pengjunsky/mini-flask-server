@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50720
 File Encoding         : 65001
 
-Date: 2018-11-08 23:10:58
+Date: 2018-11-08 23:13:11
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -65,7 +65,7 @@ CREATE TABLE `cart` (
   `update_time` int(11) DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `product_id` int(11) NOT NULL COMMENT '商品ID',
-  `property_id` int(11) NOT NULL COMMENT '属性ID',
+  `property_id` int(11) DEFAULT NULL COMMENT '属性ID',
   `uid` int(11) NOT NULL COMMENT '用户ID',
   `number` int(11) DEFAULT '1' COMMENT '数量',
   PRIMARY KEY (`id`),
