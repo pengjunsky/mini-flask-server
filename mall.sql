@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
-Source Server Version : 50505
+Source Server         : localhost_3306
+Source Server Version : 50720
 Source Host           : localhost:3306
 Source Database       : mall
 
 Target Server Type    : MYSQL
-Target Server Version : 50505
+Target Server Version : 50720
 File Encoding         : 65001
 
-Date: 2018-11-09 20:42:23
+Date: 2018-11-09 22:36:58
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -73,13 +73,16 @@ CREATE TABLE `cart` (
   KEY `property_id` (`property_id`),
   CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
   CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`property_id`) REFERENCES `product_property` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of cart
 -- ----------------------------
 INSERT INTO `cart` VALUES (null, null, '1', '11', '1', '1', '1');
 INSERT INTO `cart` VALUES (null, null, '3', '11', '1', '1', '1');
+INSERT INTO `cart` VALUES ('1541773030', null, '23', '11', '1', '1', '3');
+INSERT INTO `cart` VALUES ('1541773059', null, '24', '2', '2', '1', '1');
+INSERT INTO `cart` VALUES ('1541773114', null, '25', '2', '2', '1', '1');
 
 -- ----------------------------
 -- Table structure for `category`

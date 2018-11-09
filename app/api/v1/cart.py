@@ -9,7 +9,7 @@ from app.validators.params import CartAddValidator
 api = RedPrint('cart')
 
 
-@api.route('', methods=['GET'])
+@api.route('', methods=['GET', 'POST'])
 @auth.login_required
 def get_cart():
     uid = g.user.uid
