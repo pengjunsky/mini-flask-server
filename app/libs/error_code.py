@@ -3,7 +3,7 @@ from app.libs.error import APIException
 
 class Success(APIException):
     code = 200
-    msg = 'get success'
+    msg = 'success'
     error_code = 0
 
 

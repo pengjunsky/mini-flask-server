@@ -8,7 +8,7 @@ from app.validators.forms import ClientValidator, UserEmailValidator
 api = RedPrint('client')
 
 
-@api.route('/register', methods=['POST'])
+@api.route('/register', methods=['GET', 'POST'])
 def create_client():
     form = ClientValidator().validate_for_api()
     promise = {

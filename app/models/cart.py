@@ -32,10 +32,13 @@ class Cart(Base):
     def get_cart_by_uid(uid):
         with db.auto_check_empty(NotFound):
             return Cart.query.filter_by(uid=uid).all()
-            # carts = Cart.query.filter_by(uid=uid).all()
-            # print(carts)
-            # if carts:
-            #     # carts = [cart.hide('product') for cart in carts]
-            #     return carts
-            # else:
-            #     return []
+
+    @staticmethod
+    def add_cart(uid, product_id, property_id, number):
+        with db.auto_commit():
+            cart = Cart()
+            cart.product_id = product_id
+            cart.property_id = property_id
+            cart.number = number
+            cart.uid = uid
+            db.session.add(cart)

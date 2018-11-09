@@ -12,7 +12,7 @@ from itsdangerous import TimedJSONWebSignatureSerializer as Serializer, Signatur
 api = RedPrint('token')
 
 
-@api.route('', methods=['POST'])
+@api.route('', methods=['GET', 'POST'])
 def get_token():
     form = ClientValidator().validate_for_api()
     promise = {
@@ -28,7 +28,7 @@ def get_token():
     return jsonify(token), 201
 
 
-@api.route('/secret', methods=['POST'])
+@api.route('/secret', methods=['GET', 'POST'])
 def get_token_info():
     """获取令牌信息"""
     form = TokenValidator().validate_for_api()

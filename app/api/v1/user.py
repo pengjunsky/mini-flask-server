@@ -10,14 +10,14 @@ from app.validators.forms import UserInfoValidator
 api = RedPrint('user')
 
 
-@api.route('/<int:uid>', methods=['GET'])
+@api.route('/<int:uid>', methods=['GET', 'POST'])
 @auth.login_required
 def super_get_user(uid):
     user = User.query.filter_by(id=uid).first_or_404()
     return jsonify(user)
 
 
-@api.route('', methods=['GET'])
+@api.route('', methods=['GET', 'POST'])
 @auth.login_required
 def get_user():
     uid = g.user.uid
@@ -44,7 +44,7 @@ def delete_user():
     return DeleteSuccess()
 
 
-@api.route('/renew', methods=['POST'])
+@api.route('/renew', methods=['GET', 'POST'])
 @auth.login_required
 def update_user():
     uid = g.user.uid
