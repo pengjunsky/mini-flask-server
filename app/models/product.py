@@ -15,6 +15,7 @@ class Product(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(80), nullable=False)
     price = Column(FLOAT(precision=6, scale=2), nullable=False)
+    originalPrice = Column(FLOAT(precision=6, scale=2))
     stock = Column(Integer, default=0)
     sale = Column(Integer, default=0)
     category_id = Column(Integer, nullable=False)
