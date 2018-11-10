@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost_3306
-Source Server Version : 50720
+Source Server         : localhost
+Source Server Version : 50505
 Source Host           : localhost:3306
 Source Database       : mall
 
 Target Server Type    : MYSQL
-Target Server Version : 50720
+Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2018-11-09 22:36:58
+Date: 2018-11-10 16:40:57
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -210,7 +210,7 @@ CREATE TABLE `product` (
 -- ----------------------------
 -- Records of product
 -- ----------------------------
-INSERT INTO `product` VALUES ('1', '芹菜 半斤', null, '0.01', '0', null, '998', '3', '1528938338', null, null, '13', '0');
+INSERT INTO `product` VALUES ('1', '芹菜 半斤', null, '0.01', '0', '<div style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: 14px; text-indent: 28px; white-space: normal;\">\r\n    <span style=\"font-size: 28px; font-weight: bold; color: rgb(102, 102, 102);\">UMeditor</span>,简称UM,是为满足广大门户网站对于简单发帖框，或者回复框需求所定制的在线富文本编辑器。 UM的主要特点就是容量和加载速度上的改变，主文件的代码量为139k，而且放弃了使用传统的iframe模式，采用了div的加载方式， 以达到更快的加载速度和零加载失败率。现在UM的第一个使用者是百度贴吧，贴吧每天几亿的pv是对UM各种指标的最好测试平台。 当然随着代码的减少，UM的功能对于UE来说还是有所减少，但我们经过调研和大家对于UM提出的各种意见，提供了现在UM的功能版本， 虽然有删减，但也有增加，比如拖拽图片上传，chrome的图片拖动改变大小等。让UM能在功能和体积上达到一个平衡。UM还会提供 CDN方式，减少大家部署的成本。我们的目标不仅是要提高在线编辑的编辑体验，也希望能改变前端技术中关于富文本技术的门槛，让大家不再觉得这块是个大坑。\r\n</div>\r\n<div style=\"font-family: &quot;Microsoft YaHei&quot;; font-size: 14px; text-indent: 2em; white-space: normal; margin: 20px; line-height: 22px; color: red;\">\r\n    紧急修复了 UMEditor 的 xss 漏洞，请下载最新版更新。2016-12-22&nbsp;<br/>xss过滤白名单中去掉 iframe，防止xss漏洞，例如源码模式下直接复制：&lt;iframe src=&quot;javascript:alert(1);&quot;&gt;&lt;/iframe&gt;\r\n</div>', '998', '3', '1528938338', null, null, '13', '0');
 INSERT INTO `product` VALUES ('2', '梨花带雨 3个', null, '0.01', '0', null, '984', '2', '1528938339', null, null, '10', '0');
 INSERT INTO `product` VALUES ('3', '素米 327克', null, '0.01', '0', null, '996', '7', '1528938340', null, null, '31', '0');
 INSERT INTO `product` VALUES ('4', '红袖枸杞 6克*3袋', null, '0.01', '0', null, '998', '6', '1528938341', null, null, '32', '0');
@@ -220,7 +220,7 @@ INSERT INTO `product` VALUES ('7', '泥蒿 半斤', null, '0.01', '0', null, '99
 INSERT INTO `product` VALUES ('8', '夏日芒果 3个', null, '0.01', '0', null, '995', '2', '1528938345', null, null, '36', '0');
 INSERT INTO `product` VALUES ('9', '冬木红枣 500克', null, '0.01', '0', null, '996', '2', '1528938346', null, null, '37', '0');
 INSERT INTO `product` VALUES ('10', '万紫千凤梨 300克', null, '0.01', '0', null, '996', '2', '1528938347', null, null, '38', '0');
-INSERT INTO `product` VALUES ('11', '贵妃笑 100克贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑', '100.00', '0.01', '0', '<p>\r\n    <img src=\"http://localhost:5000/static/images/detail-1@1-dryfruit.png\" style=\"\"/>\r\n</p>\r\n<p>\r\n    <img src=\"http://localhost:5000/static/images/detail-2@1-dryfruit.png\" style=\"\"/>\r\n</p>\r\n<p>\r\n    <img src=\"http://localhost:5000/static/images/detail-3@1-dryfruit.png\" style=\"\"/>\r\n</p>\r\n<p>\r\n    <img src=\"http://localhost:5000/static/images/detail-4@1-dryfruit.png\" style=\"\"/>\r\n</p>\r\n<p>\r\n    <img src=\"http://localhost:5000/static/images/detail-5@1-dryfruit.png\" style=\"\"/>\r\n</p>\r\n<p>\r\n    <img src=\"http://localhost:5000/static/images/detail-6@1-dryfruit.png\" style=\"\"/>\r\n</p>\r\n<p>\r\n    <img src=\"http://localhost:5000/static/images/detail-7@1-dryfruit.png\" style=\"\"/>\r\n</p>\r\n<p>\r\n    <img src=\"http://localhost:5000/static/images/detail-8@1-dryfruit.png\" style=\"\"/>\r\n</p>\r\n<p>\r\n    <img src=\"http://localhost:5000/static/images/detail-9@1-dryfruit.png\" style=\"\"/>\r\n</p>\r\n<p>\r\n    <img src=\"http://localhost:5000/static/images/detail-10@1-dryfruit.png\" style=\"\"/>\r\n</p>\r\n<p>\r\n    <img src=\"http://localhost:5000/static/images/detail-11@1-dryfruit.png\" style=\"\"/>\r\n</p>\r\n<p>\r\n    <img src=\"http://localhost:5000/static/images/detail-12@1-dryfruit.png\" style=\"\"/>\r\n</p>\r\n<p>\r\n    <img src=\"http://localhost:5000/static/images/detail-13@1-dryfruit.png\" style=\"\"/>\r\n</p>', '0', '2', '1528938369', null, '新鲜爽口，风味极佳。', '39', '0');
+INSERT INTO `product` VALUES ('11', '贵妃笑 100克贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑', '100.00', '0.01', '0', '', '0', '2', '1528938369', null, '新鲜爽口，风味极佳。', '39', '0');
 INSERT INTO `product` VALUES ('12', '珍奇异果 3个', null, '0.01', '0', null, '999', '2', '1528938349', null, null, '40', '0');
 INSERT INTO `product` VALUES ('13', '绿豆 125克', null, '0.01', '0', null, '999', '7', '1528938350', null, null, '41', '0');
 INSERT INTO `product` VALUES ('14', '芝麻 50克', null, '0.01', '0', null, '999', '7', '1528938351', null, null, '42', '0');
@@ -291,13 +291,18 @@ CREATE TABLE `product_property` (
   PRIMARY KEY (`id`),
   KEY `product_id` (`product_id`),
   CONSTRAINT `product_property_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of product_property
 -- ----------------------------
 INSERT INTO `product_property` VALUES (null, null, '1', '500g', '0.10', '11', '11');
 INSERT INTO `product_property` VALUES (null, null, '2', '1000g', '0.10', '111', '11');
+INSERT INTO `product_property` VALUES (null, null, '4', '1000g', '1.00', '0', '11');
+INSERT INTO `product_property` VALUES (null, null, '5', '1000g', '1.00', '0', '11');
+INSERT INTO `product_property` VALUES (null, null, '6', '1000g', '1.00', '1', '11');
+INSERT INTO `product_property` VALUES (null, null, '7', '1000g', '1.00', '0', '11');
+INSERT INTO `product_property` VALUES (null, null, '8', '1000g', '11.00', '11', '11');
 
 -- ----------------------------
 -- Table structure for `user`
