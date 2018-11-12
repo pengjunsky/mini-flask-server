@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
-Source Server Version : 50505
+Source Server         : localhost_3306
+Source Server Version : 50720
 Source Host           : localhost:3306
 Source Database       : mall
 
 Target Server Type    : MYSQL
-Target Server Version : 50505
+Target Server Version : 50720
 File Encoding         : 65001
 
-Date: 2018-11-12 16:14:21
+Date: 2018-11-12 21:49:55
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -108,6 +108,26 @@ INSERT INTO `category` VALUES ('4', '炒货', '7', null, null, null);
 INSERT INTO `category` VALUES ('5', '点心', '4', null, null, null);
 INSERT INTO `category` VALUES ('6', '粗茶', '8', null, null, null);
 INSERT INTO `category` VALUES ('7', '淡饭', '9', null, null, null);
+
+-- ----------------------------
+-- Table structure for `comment`
+-- ----------------------------
+DROP TABLE IF EXISTS `comment`;
+CREATE TABLE `comment` (
+  `create_time` int(11) DEFAULT NULL,
+  `update_time` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) NOT NULL COMMENT '用户ID',
+  `product_id` int(11) NOT NULL COMMENT '商品ID',
+  `content` varchar(100) DEFAULT NULL COMMENT '评论内容',
+  `type` int(11) DEFAULT NULL COMMENT '评价分类1好评2中评3差评',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of comment
+-- ----------------------------
+INSERT INTO `comment` VALUES (null, null, '1', '1', '11', '你个哈皮', null);
 
 -- ----------------------------
 -- Table structure for `image`

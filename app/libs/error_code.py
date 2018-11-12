@@ -61,6 +61,12 @@ class NotFound(APIException):
     error_code = 1001
 
 
+class UserException(NotFound):
+    code = 404
+    msg = '指定的用户不存在，请检查参数'
+    error_code = 2000
+
+
 class ProductException(NotFound):
     code = 404
     msg = '指定的商品不存在，请检查参数'
