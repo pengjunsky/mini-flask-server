@@ -67,6 +67,12 @@ class ProductException(NotFound):
     error_code = 2000
 
 
+class PropertyException(NotFound):
+    code = 404
+    msg = '指定的商品规格不存在，请检查参数'
+    error_code = 2000
+
+
 class BannerMissException(NotFound):
     code = 404
     msg = '请求的Banner不存在'

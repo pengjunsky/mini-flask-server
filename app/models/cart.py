@@ -1,7 +1,6 @@
-from sqlalchemy import Column, Integer, ForeignKey, orm
-from sqlalchemy.orm import relationship
+from sqlalchemy import Column, Integer, ForeignKey
 
-from app.libs.error_code import NotFound, ProductException
+from app.libs.error_code import NotFound, ProductException, PropertyException
 from app.models.base import Base, db
 from app.models.product import Product
 from app.models.product_property import Product2Property
@@ -12,7 +11,7 @@ class Cart(Base):
     product_id = Column(Integer, ForeignKey('product.id'), nullable=False)
     property_id = Column(Integer, ForeignKey('product_property.id'))
     uid = Column(Integer, nullable=False)
-    number = Column(Integer, default=1)
+    num = Column(Integer, default=1)
 
     def keys(self):
         self.hide('product_id', 'property_id', 'uid').append('product', 'property')
@@ -25,8 +24,9 @@ class Cart(Base):
 
     @property
     def property(self):
-        with db.auto_check_empty(ProductException):
-            return Product2Property.query.filter_by(id=self.property_id).first_or_404().hide('stock')
+        if self.property_id:
+            with db.auto_check_empty(PropertyException):
+                return Product2Property.query.filter_by(id=self.property_id).first_or_404().hide('stock')
 
     @staticmethod
     def get_cart_by_uid(uid):
@@ -34,11 +34,11 @@ class Cart(Base):
             return Cart.query.filter_by(uid=uid).all()
 
     @staticmethod
-    def add_cart(uid, product_id, property_id, number):
+    def add_cart(uid, product_id, property_id, num):
         with db.auto_commit():
             cart = Cart()
             cart.product_id = product_id
             cart.property_id = property_id
-            cart.number = number
+            cart.num = num
             cart.uid = uid
             db.session.add(cart)

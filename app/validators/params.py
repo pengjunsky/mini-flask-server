@@ -1,7 +1,6 @@
 from wtforms import IntegerField
 from wtforms.validators import DataRequired, ValidationError
 
-from app.libs.error_code import NotFound
 from app.models.product import Product
 from app.models.product_property import Product2Property
 from app.validators.base import BaseValidator
@@ -25,8 +24,8 @@ class Count(BaseValidator):
 
 class CartAddValidator(BaseValidator):
     product_id = IntegerField(validators=[DataRequired()])
-    property_id = IntegerField(validators=[DataRequired()])
-    number = IntegerField(default='1')
+    property_id = IntegerField()
+    num = IntegerField(default='1')
 
     def validate_product_id(self, value):
         if not self.isPositiveInteger(value.data):
@@ -35,11 +34,23 @@ class CartAddValidator(BaseValidator):
             raise ValidationError(message='the resource are not found')
 
     def validate_property_id(self, value):
+        if not value.data:
+            return
         if not self.isPositiveInteger(value.data):
             raise ValidationError(message='property_id must be positive integer')
         if not Product2Property.query.filter_by(id=value.data).first():
             raise ValidationError(message='the resource are not found')
 
-    def validate_number(self, value):
+    def validate_num(self, value):
         if not self.isPositiveInteger(value.data):
-            raise ValidationError(message='number must be positive integer')
+            raise ValidationError(message='num must be positive integer')
+        if self.property_id.data:
+            property = Product2Property.query.filter_by(id=self.property_id.data).first()
+            if value.data > property.stock:
+                raise ValidationError(message='num greater than stock')
+        else:
+            product = Product.query.filter_by(id=self.product_id.data).first()
+            print(value.data)
+            print(product.stock)
+            if value.data > product.stock:
+                raise ValidationError(message='num greater than stock')

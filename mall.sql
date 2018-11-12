@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2018-11-10 16:40:57
+Date: 2018-11-12 16:14:21
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -67,22 +67,23 @@ CREATE TABLE `cart` (
   `product_id` int(11) NOT NULL COMMENT '商品ID',
   `property_id` int(11) DEFAULT NULL COMMENT '属性ID',
   `uid` int(11) NOT NULL COMMENT '用户ID',
-  `number` int(11) DEFAULT '1' COMMENT '数量',
+  `num` int(11) DEFAULT '1' COMMENT '数量',
   PRIMARY KEY (`id`),
   KEY `product_id` (`product_id`),
   KEY `property_id` (`property_id`),
   CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
   CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`property_id`) REFERENCES `product_property` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of cart
 -- ----------------------------
-INSERT INTO `cart` VALUES (null, null, '1', '11', '1', '1', '1');
-INSERT INTO `cart` VALUES (null, null, '3', '11', '1', '1', '1');
-INSERT INTO `cart` VALUES ('1541773030', null, '23', '11', '1', '1', '3');
-INSERT INTO `cart` VALUES ('1541773059', null, '24', '2', '2', '1', '1');
-INSERT INTO `cart` VALUES ('1541773114', null, '25', '2', '2', '1', '1');
+INSERT INTO `cart` VALUES ('1542010236', null, '111', '32', null, '1', '1');
+INSERT INTO `cart` VALUES ('1542010241', null, '112', '32', null, '1', '3');
+INSERT INTO `cart` VALUES ('1542010253', null, '113', '32', null, '1', '3');
+INSERT INTO `cart` VALUES ('1542010264', null, '114', '31', null, '1', '1');
+INSERT INTO `cart` VALUES ('1542010277', null, '115', '11', '8', '1', '1');
+INSERT INTO `cart` VALUES ('1542010304', null, '116', '11', '2', '1', '4');
 
 -- ----------------------------
 -- Table structure for `category`
@@ -241,7 +242,7 @@ INSERT INTO `product` VALUES ('29', '冰心鸡蛋 2个', null, '0.01', '0', null
 INSERT INTO `product` VALUES ('30', '八宝莲子 200克', null, '0.01', '0', null, '999', '7', '1528938366', null, null, '14', '0');
 INSERT INTO `product` VALUES ('31', '深涧木耳 78克', null, '0.01', '0', null, '999', '7', '1528938367', null, null, '60', '0');
 INSERT INTO `product` VALUES ('32', '土豆 半斤', null, '0.01', '0', null, '999', '3', '1528938368', null, null, '66', '0');
-INSERT INTO `product` VALUES ('33', '青椒 半斤', null, '0.01', '0', null, '999', '3', '1528938369', null, null, '67', '0');
+INSERT INTO `product` VALUES ('33', '青椒 半斤', null, '0.01', '0', null, '0', '3', '1528938369', null, null, '67', '0');
 
 -- ----------------------------
 -- Table structure for `product_image`
