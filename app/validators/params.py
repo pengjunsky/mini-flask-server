@@ -25,7 +25,7 @@ class Count(BaseValidator):
 class CartAddValidator(BaseValidator):
     product_id = IntegerField(validators=[DataRequired()])
     property_id = IntegerField()
-    num = IntegerField(default='1')
+    num = IntegerField(default=1)
 
     def validate_product_id(self, value):
         if not self.isPositiveInteger(value.data):
@@ -50,7 +50,5 @@ class CartAddValidator(BaseValidator):
                 raise ValidationError(message='num greater than stock')
         else:
             product = Product.query.filter_by(id=self.product_id.data).first()
-            print(value.data)
-            print(product.stock)
             if value.data > product.stock:
                 raise ValidationError(message='num greater than stock')

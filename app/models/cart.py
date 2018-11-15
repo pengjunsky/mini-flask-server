@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, ForeignKey
+from sqlalchemy import Column, Integer, ForeignKey, and_
 
 from app.libs.error_code import NotFound, ProductException, PropertyException
 from app.models.base import Base, db
@@ -35,10 +35,18 @@ class Cart(Base):
 
     @staticmethod
     def add_cart(uid, product_id, property_id, num):
-        with db.auto_commit():
-            cart = Cart()
-            cart.product_id = product_id
-            cart.property_id = property_id
-            cart.num = num
-            cart.uid = uid
-            db.session.add(cart)
+        old_cart = Cart.query.filter(and_
+                                     (Cart.uid == uid, Cart.product_id == product_id,
+                                      Cart.property_id == property_id)).first()
+        if not old_cart:
+            with db.auto_commit():
+                cart = Cart()
+                cart.product_id = product_id
+                cart.property_id = property_id
+                cart.num = num
+                cart.uid = uid
+                db.session.add(cart)
+        else:
+            with db.auto_commit():
+                old_cart.num += num
+                old_cart.update()
