@@ -20,13 +20,13 @@ class Cart(Base):
     @property
     def product(self):
         with db.auto_check_empty(ProductException):
-            return Product.query.filter_by(id=self.product_id).first_or_404().hide('summary', 'sale', 'stock')
+            return Product.query.filter_by(id=self.product_id).first_or_404().hide('summary', 'sale')
 
     @property
     def property(self):
         if self.property_id:
             with db.auto_check_empty(PropertyException):
-                return Product2Property.query.filter_by(id=self.property_id).first_or_404().hide('stock')
+                return Product2Property.query.filter_by(id=self.property_id).first_or_404()
 
     @staticmethod
     def get_cart_by_uid(uid):
