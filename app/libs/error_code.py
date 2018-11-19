@@ -70,13 +70,13 @@ class UserException(NotFound):
 class ProductException(NotFound):
     code = 404
     msg = '指定的商品不存在，请检查参数'
-    error_code = 2000
+    error_code = 3000
 
 
 class PropertyException(NotFound):
     code = 404
     msg = '指定的商品规格不存在，请检查参数'
-    error_code = 2000
+    error_code = 3001
 
 
 class BannerMissException(NotFound):
@@ -89,3 +89,9 @@ class CategoryException(NotFound):
     code = 404
     msg = '指定的类目不存在, 请检查参数'
     error_code = 5000
+
+
+class CartException(NotFound):
+    code = 404
+    msg = '购物车商品不存在, 请检查参数'
+    error_code = 6000

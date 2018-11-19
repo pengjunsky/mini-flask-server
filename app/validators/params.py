@@ -1,6 +1,9 @@
-from wtforms import IntegerField
+from wtforms import IntegerField, StringField
 from wtforms.validators import DataRequired, ValidationError
 
+from app.libs.error_code import CartException
+from app.models.base import db
+from app.models.cart import Cart
 from app.models.product import Product
 from app.models.product_property import Product2Property
 from app.validators.base import BaseValidator
@@ -46,9 +49,28 @@ class CartAddValidator(BaseValidator):
             raise ValidationError(message='num must be positive integer')
         if self.property_id.data:
             property = Product2Property.query.filter_by(id=self.property_id.data).first()
-            if value.data > property.stock:
-                raise ValidationError(message='num greater than stock')
+            if property:
+                if value.data > property.stock:
+                    raise ValidationError(message='num greater than stock')
         else:
             product = Product.query.filter_by(id=self.product_id.data).first()
-            if value.data > product.stock:
-                raise ValidationError(message='num greater than stock')
+            if product:
+                if value.data > product.stock:
+                    raise ValidationError(message='num greater than stock')
+
+
+class CartIdsValidator(BaseValidator):
+    cartIds = StringField(validators=[DataRequired()])
+
+    def validate_cartIds(self, value):
+        cartIds = value.data
+        if not isinstance(cartIds, list):
+            raise ValidationError(message='购物车参数不正确')
+        if len(cartIds) == 0:
+            raise ValidationError(message='购物车列表不能为空')
+        for cartId in cartIds:
+            if not self.isPositiveInteger(cartId):
+                raise ValidationError(message='购物车列表参数错误')
+            else:
+                with db.auto_check_empty(CartException()):
+                    Cart.query.filter_by(id=cartId).first_or_404()

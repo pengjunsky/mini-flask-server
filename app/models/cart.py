@@ -50,3 +50,10 @@ class Cart(Base):
             with db.auto_commit():
                 old_cart.num += num
                 old_cart.update()
+
+    @staticmethod
+    def del_cart(uid, cids):
+        for cid in cids:
+            with db.auto_commit():
+                cart = Cart.query.filter(and_(Cart.uid == uid, Cart.id == cid)).first()
+                db.session.delete(cart)
