@@ -23,3 +23,4 @@ class BaseValidator(Form):
         except ValueError:
             return False
         return True if (isinstance(value, int) and value > 0) else False
+

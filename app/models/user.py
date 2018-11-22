@@ -4,6 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from app.libs.enums import ScopeEnum
 from app.libs.error_code import AuthFailed, NotFound
 from app.models.base import Base, db
+from app.models.user_address import UserAddress
 from app.service.user_token import UserToken
 
 
@@ -14,10 +15,11 @@ class User(Base):
     nickname = Column(String(24))
     userPic = Column(String(255))
     auth = Column(SmallInteger, default=1)
+    _user_address = db.relationship('UserAddress', backref='author', lazy='dynamic')
     _password = Column('password', String(100))
 
     def keys(self):
-        self.hide('openid', '_password')
+        self.hide('openid', '_password').append('user_address')
         return self.fields
 
     @property
@@ -27,6 +29,24 @@ class User(Base):
     @password.setter
     def password(self, raw):
         self._password = generate_password_hash(raw)
+
+    @property
+    def user_address(self):
+        return self._user_address.first()
+
+    def save_address(self, address_info, uid):
+        with db.auto_commit():
+            address = self._user_address.first()
+            if not address:
+                address = UserAddress()
+            address.name = address_info.name
+            address.mobile = address_info.mobile
+            address.province = address_info.province
+            address.city = address_info.city
+            address.country = address_info.country
+            address.detail = address_info.detail
+            address.user_id = uid
+            db.session.add(address)
 
     @staticmethod
     def register_by_email(nickname, account, secret):

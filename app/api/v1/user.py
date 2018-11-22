@@ -46,7 +46,7 @@ def delete_user():
 
 @api.route('/renew', methods=['GET', 'POST'])
 @auth.login_required
-def update_user():
+def renew_user():
     uid = g.user.uid
     form = UserInfoValidator().validate_for_api()
     with db.auto_commit():

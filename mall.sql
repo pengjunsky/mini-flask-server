@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50720
 File Encoding         : 65001
 
-Date: 2018-11-12 21:49:55
+Date: 2018-11-22 22:45:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -73,17 +73,14 @@ CREATE TABLE `cart` (
   KEY `property_id` (`property_id`),
   CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
   CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`property_id`) REFERENCES `product_property` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=120 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of cart
 -- ----------------------------
-INSERT INTO `cart` VALUES ('1542010236', null, '111', '32', null, '1', '1');
-INSERT INTO `cart` VALUES ('1542010241', null, '112', '32', null, '1', '3');
-INSERT INTO `cart` VALUES ('1542010253', null, '113', '32', null, '1', '3');
-INSERT INTO `cart` VALUES ('1542010264', null, '114', '31', null, '1', '1');
-INSERT INTO `cart` VALUES ('1542010277', null, '115', '11', '8', '1', '1');
 INSERT INTO `cart` VALUES ('1542010304', null, '116', '11', '2', '1', '4');
+INSERT INTO `cart` VALUES ('1542289216', '1542642373', '118', '11', '1', '1', '26');
+INSERT INTO `cart` VALUES ('1542290393', '1542637924', '119', '11', null, '1', '5');
 
 -- ----------------------------
 -- Table structure for `category`
@@ -241,7 +238,7 @@ INSERT INTO `product` VALUES ('7', '泥蒿 半斤', null, '0.01', '0', null, '99
 INSERT INTO `product` VALUES ('8', '夏日芒果 3个', null, '0.01', '0', null, '995', '2', '1528938345', null, null, '36', '0');
 INSERT INTO `product` VALUES ('9', '冬木红枣 500克', null, '0.01', '0', null, '996', '2', '1528938346', null, null, '37', '0');
 INSERT INTO `product` VALUES ('10', '万紫千凤梨 300克', null, '0.01', '0', null, '996', '2', '1528938347', null, null, '38', '0');
-INSERT INTO `product` VALUES ('11', '贵妃笑 100克贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑', '100.00', '0.01', '0', '', '0', '2', '1528938369', null, '新鲜爽口，风味极佳。', '39', '0');
+INSERT INTO `product` VALUES ('11', '贵妃笑 100克贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑', '100.00', '0.01', '0', '', '111', '2', '1528938369', null, '新鲜爽口，风味极佳。', '39', '0');
 INSERT INTO `product` VALUES ('12', '珍奇异果 3个', null, '0.01', '0', null, '999', '2', '1528938349', null, null, '40', '0');
 INSERT INTO `product` VALUES ('13', '绿豆 125克', null, '0.01', '0', null, '999', '7', '1528938350', null, null, '41', '0');
 INSERT INTO `product` VALUES ('14', '芝麻 50克', null, '0.01', '0', null, '999', '7', '1528938351', null, null, '42', '0');
@@ -352,3 +349,28 @@ INSERT INTO `user` VALUES ('1539848235', null, '2', null, 'wwe1221@qq.com', 'nih
 INSERT INTO `user` VALUES ('1540349983', null, '4', null, 'wwe12221@qq.com', 'nihaoe12212', null, '1', 'pbkdf2:sha256:50000$8FLGWA6K$f71dc8cae1ad00cc9ba7bca571400ab40835be02837cf3eb5db9bc9d4f87550b');
 INSERT INTO `user` VALUES ('1540363560', null, '5', null, 'wwe122221@qq.com', 'nihaoe12212', null, '1', 'pbkdf2:sha256:50000$FjAW1u03$cf508e1ff3b562aec3c2eeea6a0bdde4eb678ddd79dba7ae26fbaab49bfd447f');
 INSERT INTO `user` VALUES ('1540622646', null, '6', null, 'wwe1222221@qq.com', 'nihaoe122122', null, '1', 'pbkdf2:sha256:50000$8ibOAwHs$c573ce052f20036efe1af7afb61dd99a03fe45310505afe17b87bc10682af151');
+
+-- ----------------------------
+-- Table structure for `user_address`
+-- ----------------------------
+DROP TABLE IF EXISTS `user_address`;
+CREATE TABLE `user_address` (
+  `create_time` int(11) DEFAULT NULL,
+  `update_time` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) NOT NULL,
+  `mobile` varchar(20) NOT NULL,
+  `province` varchar(20) DEFAULT NULL,
+  `city` varchar(20) DEFAULT NULL,
+  `country` varchar(20) DEFAULT NULL,
+  `detail` varchar(100) DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `user_address_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of user_address
+-- ----------------------------
+INSERT INTO `user_address` VALUES ('1542896410', null, '1', 'xxx', '18888888888', '湖南省', 'xxx市', 'xx县', 'xxx', '1');

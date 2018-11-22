@@ -95,3 +95,9 @@ class CartException(NotFound):
     code = 404
     msg = '购物车商品不存在, 请检查参数'
     error_code = 6000
+
+
+class UserException(NotFound):
+    code = 400
+    msg = '用户不存在'
+    error_code = 7000
