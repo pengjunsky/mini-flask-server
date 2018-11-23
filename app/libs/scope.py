@@ -18,7 +18,7 @@ class UserScope(Scope):
 
 
 class AdminScope(Scope):
-    allow_module = ['v1.user', 'v1.cart']
+    allow_module = ['v1.user', 'v1.cart', 'v1.address']
 
 
 def is_in_scope(scope, endpoint):

@@ -74,3 +74,12 @@ class CartIdsValidator(BaseValidator):
             else:
                 with db.auto_check_empty(CartException()):
                     Cart.query.filter_by(id=cartId).first_or_404()
+
+
+class ProductIdValidator(BaseValidator):
+    ids = StringField(validators=[DataRequired()])
+
+    def validate_ids(self, value):
+        ids = value.data
+        if not isinstance(ids, list):
+            raise ValidationError(message='参数不正确')

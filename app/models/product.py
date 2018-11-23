@@ -82,3 +82,7 @@ class Product(Base):
         with db.auto_check_empty(ProductException):
             return Product.query.filter_by(id=id).first_or_404() \
                 .append('detail_img', 'banner_img', 'property', 'content', )
+
+    @staticmethod
+    def get_order_product(ids):
+        print(ids)

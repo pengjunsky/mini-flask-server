@@ -7,7 +7,7 @@ from app.libs.enums import ClientTypeEnum
 from app.models.user import User
 from app.validators.base import BaseValidator
 
-Address = namedtuple('Address', ['name', 'mobile', 'province', 'city', 'country', 'detail'])
+Address = namedtuple('Address', ['name', 'mobile', 'detail'])
 
 
 class ClientValidator(BaseValidator):
@@ -46,17 +46,13 @@ class AddressNew(BaseValidator):
     name = StringField(validators=[DataRequired()])
     mobile = StringField(validators=[
         DataRequired(),
-        length(min=11, max=11, message='手机号为11个数字'),
-        Regexp(r'^1(3|4|5|7|8)[0-9]\d{8}$')
+        # length(min=11, max=11, message='手机号为11个数字'),
+        # Regexp(r'^1(3|4|5|7|8)[0-9]\d{8}$')
     ])
-    province = StringField(validators=[DataRequired()])
-    city = StringField(validators=[DataRequired()])
-    country = StringField(validators=[DataRequired()])
-    detail = StringField()
+    detail = StringField(validators=[DataRequired()])
 
     @property
     def data(self):
         return Address(
-            self.name.data, self.mobile.data, self.province.data,
-            self.city.data, self.country.data, self.detail.data
+            self.name.data, self.mobile.data, self.detail.data
         )

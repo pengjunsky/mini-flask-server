@@ -1,4 +1,4 @@
-from flask import jsonify
+from flask import jsonify, g
 
 from app.libs.error_code import RenewSuccess, UserException
 from app.libs.redprint import RedPrint

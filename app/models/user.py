@@ -41,9 +41,6 @@ class User(Base):
                 address = UserAddress()
             address.name = address_info.name
             address.mobile = address_info.mobile
-            address.province = address_info.province
-            address.city = address_info.city
-            address.country = address_info.country
             address.detail = address_info.detail
             address.user_id = uid
             db.session.add(address)
