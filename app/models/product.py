@@ -1,3 +1,4 @@
+from flask import jsonify
 from sqlalchemy import Column, Integer, String, ForeignKey, and_
 from sqlalchemy import desc, asc
 from sqlalchemy.dialects.mysql import FLOAT
@@ -85,4 +86,12 @@ class Product(Base):
 
     @staticmethod
     def get_order_product(ids):
-        print(ids)
+        o_product = []
+        with db.auto_check_empty(ProductException):
+            product = Product.query.filter_by(id=ids['product_id']).first_or_404().hide(
+                'originalPrice', 'sale', 'summary')
+            o_product.append(product)
+
+        # if not ids['product_id']:
+        #     pass
+        return product

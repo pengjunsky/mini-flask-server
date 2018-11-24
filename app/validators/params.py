@@ -80,6 +80,20 @@ class ProductIdValidator(BaseValidator):
     ids = StringField(validators=[DataRequired()])
 
     def validate_ids(self, value):
-        ids = value.data
-        if not isinstance(ids, list):
+        if not isinstance(value.data, list):
             raise ValidationError(message='参数不正确')
+        for ids in value.data:
+            if 'product_id' not in ids.keys():
+                raise ValidationError(message='product_id参数不存在')
+            else:
+                if not self.isPositiveInteger(ids['product_id']):
+                    raise ValidationError(message='product_id must be positive integer')
+            if 'property_id' in ids.keys():
+                if ids['property_id']:
+                    if not self.isPositiveInteger(ids['property_id']):
+                        raise ValidationError(message='property_id must be positive integer')
+            if 'num' not in ids.keys():
+                raise ValidationError(message='num参数不存在')
+            else:
+                if not self.isPositiveInteger(ids['num']):
+                    raise ValidationError(message='num must be positive integer')
