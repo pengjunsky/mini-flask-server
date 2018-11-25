@@ -3,7 +3,7 @@ from sqlalchemy import Column, Integer, String, ForeignKey, and_
 from sqlalchemy import desc, asc
 from sqlalchemy.dialects.mysql import FLOAT
 
-from app.libs.error_code import ProductException
+from app.libs.error_code import ProductException, PropertyException
 from app.models.image import Image
 
 from app.models.product_image import Product2Image
@@ -86,12 +86,16 @@ class Product(Base):
 
     @staticmethod
     def get_order_product(ids):
-        o_product = []
         with db.auto_check_empty(ProductException):
-            product = Product.query.filter_by(id=ids['product_id']).first_or_404().hide(
-                'originalPrice', 'sale', 'summary')
-            o_product.append(product)
-
-        # if not ids['product_id']:
-        #     pass
+            product = dict(Product.query.filter_by(id=ids['product_id']).first_or_404().hide(
+                'originalPrice', 'sale', 'summary'))
+        if 'property_id' in ids.keys():
+            if ids['property_id']:
+                with db.auto_check_empty(PropertyException):
+                    product['property'] = dict(Product2Property.query.filter_by(id=ids['property_id']).first_or_404())
+            else:
+                product['property'] = None
+        else:
+            product['property'] = None
+        product['num'] = ids['num']
         return product

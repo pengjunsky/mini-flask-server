@@ -32,5 +32,4 @@ def get_order_product():
     o_product = []
     for ids in form.ids.data:
         o_product.append(Product.get_order_product(ids))
-
     return jsonify(o_product)
