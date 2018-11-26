@@ -15,8 +15,8 @@ api = RedPrint('address')
 @auth.login_required
 def get_address():
     uid = g.user.uid
-    with db.auto_check_empty(UserException(error_code=6001, msg='用户地址不存在')):
-        user_address = UserAddress.query.filter_by(user_id=uid).first_or_404()
+    # with db.auto_check_empty(UserException(error_code=6001, msg='用户地址不存在')):
+    user_address = UserAddress.query.filter_by(user_id=uid).first()
     return jsonify(user_address)
 
 
