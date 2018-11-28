@@ -2,7 +2,7 @@ from datetime import datetime
 
 from flask import current_app
 from flask_sqlalchemy import SQLAlchemy as _SQLAlchemy, BaseQuery
-from sqlalchemy import Column, Integer, SmallInteger, inspect, orm
+from sqlalchemy import Column, Integer, inspect, orm
 from contextlib import contextmanager
 
 from app.libs.error_code import NotFound

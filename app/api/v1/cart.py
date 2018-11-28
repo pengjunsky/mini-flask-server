@@ -22,7 +22,7 @@ def get_cart():
 def add_cart():
     uid = g.user.uid
     form = CartAddValidator().validate_for_api()
-    Cart.add_cart(uid, form.product_id.data, form.property_id.data, form.num.data)
+    Cart.add_cart(uid, form.product_id.data, form.property_id.data, form.qty.data)
     return Success()
 
 

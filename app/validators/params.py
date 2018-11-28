@@ -28,7 +28,7 @@ class Count(BaseValidator):
 class CartAddValidator(BaseValidator):
     product_id = IntegerField(validators=[DataRequired()])
     property_id = IntegerField()
-    num = IntegerField(default=1)
+    qty = IntegerField(default=1)
 
     def validate_product_id(self, value):
         if not self.isPositiveInteger(value.data):
@@ -44,19 +44,19 @@ class CartAddValidator(BaseValidator):
         if not Product2Property.query.filter_by(id=value.data).first():
             raise ValidationError(message='the resource are not found')
 
-    def validate_num(self, value):
+    def validate_qty(self, value):
         if not self.isPositiveInteger(value.data):
-            raise ValidationError(message='num must be positive integer')
+            raise ValidationError(message='qty must be positive integer')
         if self.property_id.data:
             property = Product2Property.query.filter_by(id=self.property_id.data).first()
             if property:
                 if value.data > property.stock:
-                    raise ValidationError(message='num greater than stock')
+                    raise ValidationError(message='qty greater than stock')
         else:
             product = Product.query.filter_by(id=self.product_id.data).first()
             if product:
                 if value.data > product.stock:
-                    raise ValidationError(message='num greater than stock')
+                    raise ValidationError(message='qty greater than stock')
 
 
 class CartIdsValidator(BaseValidator):
@@ -92,8 +92,8 @@ class ProductIdValidator(BaseValidator):
                 if ids['property_id']:
                     if not self.isPositiveInteger(ids['property_id']):
                         raise ValidationError(message='property_id must be positive integer')
-            if 'num' not in ids.keys():
-                raise ValidationError(message='num参数不存在')
+            if 'qty' not in ids.keys():
+                raise ValidationError(message='qty参数不存在')
             else:
-                if not self.isPositiveInteger(ids['num']):
-                    raise ValidationError(message='num must be positive integer')
+                if not self.isPositiveInteger(ids['qty']):
+                    raise ValidationError(message='qty must be positive integer')

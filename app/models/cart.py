@@ -11,7 +11,7 @@ class Cart(Base):
     product_id = Column(Integer, ForeignKey('product.id'), nullable=False)
     property_id = Column(Integer, ForeignKey('product_property.id'))
     uid = Column(Integer, nullable=False)
-    num = Column(Integer, default=1)
+    qty = Column(Integer, default=1)
 
     def keys(self):
         self.hide('product_id', 'property_id', 'uid').append('product', 'property')
@@ -34,7 +34,7 @@ class Cart(Base):
             return Cart.query.filter_by(uid=uid).all()
 
     @staticmethod
-    def add_cart(uid, product_id, property_id, num):
+    def add_cart(uid, product_id, property_id, qty):
         old_cart = Cart.query.filter(and_
                                      (Cart.uid == uid, Cart.product_id == product_id,
                                       Cart.property_id == property_id)).first()
@@ -43,12 +43,12 @@ class Cart(Base):
                 cart = Cart()
                 cart.product_id = product_id
                 cart.property_id = property_id
-                cart.num = num
+                cart.qty = qty
                 cart.uid = uid
                 db.session.add(cart)
         else:
             with db.auto_commit():
-                old_cart.num += num
+                old_cart.qty += qty
                 old_cart.update()
 
     @staticmethod

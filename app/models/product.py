@@ -1,4 +1,3 @@
-from flask import jsonify
 from sqlalchemy import Column, Integer, String, ForeignKey, and_
 from sqlalchemy import desc, asc
 from sqlalchemy.dialects.mysql import FLOAT
@@ -97,5 +96,5 @@ class Product(Base):
                 product['property'] = None
         else:
             product['property'] = None
-        product['num'] = ids['num']
+        product['qty'] = ids['qty']
         return product
