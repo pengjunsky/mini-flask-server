@@ -18,5 +18,9 @@ class UserCoupon(Base):
     @staticmethod
     def get_user_coupon_all(uid):
         current_time = int(int(datetime.now().timestamp()))
-        return UserCoupon.query.filter(and_(UserCoupon.user_id == uid, UserCoupon.status == 1,
-                                            )).all()
+        coupons = UserCoupon.query.filter(and_(UserCoupon.user_id == uid, UserCoupon.status == 1)).all()
+        user_coupon = []
+        for coupon in coupons:
+            if coupon.coupon.dead_time > current_time:
+                user_coupon.append(coupon)
+        return user_coupon
