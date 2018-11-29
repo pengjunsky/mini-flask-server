@@ -22,7 +22,7 @@ def get_user_coupon():
     return jsonify(coupon)
 
 
-@api.route('/order', methods=['GET', 'POST'])
+@api.route('/order', methods=['POST'])
 @auth.login_required
 def get_order_coupon():
     uid = g.user.uid
