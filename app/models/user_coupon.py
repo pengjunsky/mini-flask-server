@@ -24,3 +24,18 @@ class UserCoupon(Base):
             if coupon.coupon.dead_time > current_time:
                 user_coupon.append(coupon)
         return user_coupon
+
+    @staticmethod
+    def get_order_coupon(data, uid):
+        user_coupon = UserCoupon.get_user_coupon_all(uid)
+        coupons = []
+        total_price = 0
+        for data in data:
+            total_price += data['total']
+            for coupon in user_coupon:
+                if data['product_id'] == coupon.coupon.n_product or data['category_id'] == \
+                        coupon.coupon.n_category or \
+                        (total_price > coupon.coupon.n_price if coupon.coupon.n_price else None):
+                    if coupon not in coupons:
+                        coupons.append(coupon)
+        return coupons

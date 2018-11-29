@@ -25,7 +25,7 @@ class Product(Base):
     postage = Column(Integer, default=0)
 
     def keys(self):
-        self.hide('main_img_id', 'content', 'category_id').append('main_img')
+        self.hide('main_img_id', 'content').append('main_img')
         return self.fields
 
     @property

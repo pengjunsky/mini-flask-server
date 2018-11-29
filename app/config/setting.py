@@ -1,5 +1,5 @@
 # token时间
-TOKEN_EXPIRATION = 2 * 3600
+TOKEN_EXPIRATION = 24 * 3600 * 30
 
 # 微信小程序
 # APP_ID = 'wxdc06dfa65e68135d'

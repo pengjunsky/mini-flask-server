@@ -97,3 +97,27 @@ class ProductIdValidator(BaseValidator):
             else:
                 if not self.isPositiveInteger(ids['qty']):
                     raise ValidationError(message='qty must be positive integer')
+
+
+class OrderCouponValidator(BaseValidator):
+    data = StringField(validators=[DataRequired()])
+
+    def validate_data(self, value):
+        if not isinstance(value.data, list):
+            raise ValidationError(message='参数不正确')
+        for data in value.data:
+            if 'product_id' not in data.keys():
+                raise ValidationError(message='product_id参数不存在')
+            else:
+                if not self.isPositiveInteger(data['product_id']):
+                    raise ValidationError(message='product_id must be positive integer')
+            if 'category_id' not in data.keys():
+                raise ValidationError(message='category_id参数不存在')
+            else:
+                if not self.isPositiveInteger(data['category_id']):
+                    raise ValidationError(message='category_id must be positive integer')
+            if 'total' not in data.keys():
+                raise ValidationError(message='total参数不存在')
+            else:
+                if not self.isPositiveInteger(data['total']):
+                    raise ValidationError(message='total must be positive integer')
