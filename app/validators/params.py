@@ -119,5 +119,5 @@ class OrderCouponValidator(BaseValidator):
             if 'total' not in data.keys():
                 raise ValidationError(message='total参数不存在')
             else:
-                if not self.isPositiveInteger(data['total']):
+                if not self.isPositivePrice(data['total']):
                     raise ValidationError(message='total must be positive integer')

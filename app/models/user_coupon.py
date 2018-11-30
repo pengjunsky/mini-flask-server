@@ -32,10 +32,10 @@ class UserCoupon(Base):
         total_price = 0
         for data in data:
             total_price += data['total']
-            for coupon in user_coupon:
-                if data['product_id'] == coupon.coupon.n_product or data['category_id'] == \
-                        coupon.coupon.n_category or \
-                        (total_price > coupon.coupon.n_price if coupon.coupon.n_price else None):
-                    if coupon not in coupons:
-                        coupons.append(coupon)
+            for i in user_coupon:
+                if data['product_id'] == i.coupon.n_product or data['category_id'] == \
+                        i.coupon.n_category or \
+                        (total_price > i.coupon.n_price if i.coupon.n_price else None):
+                    if i not in coupons:
+                        coupons.append(i)
         return coupons
