@@ -55,6 +55,12 @@ class ForbiddenException(APIException):
     error_code = 1004
 
 
+class StockException(APIException):
+    code = 403
+    msg = 'larger than stock'
+    error_code = 3001
+
+
 class NotFound(APIException):
     code = 404
     msg = 'the resource are not found'

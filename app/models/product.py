@@ -2,7 +2,7 @@ from sqlalchemy import Column, Integer, String, ForeignKey, and_
 from sqlalchemy import desc, asc
 from sqlalchemy.dialects.mysql import FLOAT
 
-from app.libs.error_code import ProductException, PropertyException
+from app.libs.error_code import ProductException, PropertyException, StockException
 from app.models.image import Image
 
 from app.models.product_image import Product2Image
@@ -97,4 +97,6 @@ class Product(Base):
         else:
             product['property'] = None
         product['qty'] = ids['qty']
+        if product['qty'] > product['stock']:
+            raise StockException(msg=product['name']+'库存不足')
         return product

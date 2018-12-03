@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
-Source Server Version : 50505
+Source Server         : localhost_3306
+Source Server Version : 50720
 Source Host           : localhost:3306
 Source Database       : mall
 
 Target Server Type    : MYSQL
-Target Server Version : 50505
+Target Server Version : 50720
 File Encoding         : 65001
 
-Date: 2018-12-03 15:28:26
+Date: 2018-12-03 22:50:06
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -230,6 +230,56 @@ INSERT INTO `image` VALUES ('66', '/product-vg@4.png', '1', null, null);
 INSERT INTO `image` VALUES ('67', '/product-vg@5.png', '1', null, null);
 INSERT INTO `image` VALUES ('68', '/product-vg@2.png', '1', null, null);
 INSERT INTO `image` VALUES ('69', '/product-vg@3.png', '1', null, null);
+
+-- ----------------------------
+-- Table structure for `order`
+-- ----------------------------
+DROP TABLE IF EXISTS `order`;
+CREATE TABLE `order` (
+  `create_time` int(11) DEFAULT NULL,
+  `update_time` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_no` varchar(20) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `total_price` float(6,2) NOT NULL,
+  `snap_address` varchar(500) NOT NULL,
+  `coupon_price` float(6,2) DEFAULT NULL,
+  `remark` varchar(100) DEFAULT NULL,
+  `prepay_id` varchar(100) DEFAULT NULL,
+  `status` smallint(6) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `order_no` (`order_no`),
+  UNIQUE KEY `user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of order
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `order_snap`
+-- ----------------------------
+DROP TABLE IF EXISTS `order_snap`;
+CREATE TABLE `order_snap` (
+  `create_time` int(11) DEFAULT NULL,
+  `update_time` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_no` varchar(20) NOT NULL,
+  `snap_name` varchar(80) NOT NULL,
+  `snap_img_id` int(11) NOT NULL,
+  `price` float(6,2) NOT NULL,
+  `property_name` varchar(30) DEFAULT NULL,
+  `count` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `snap_img_id` (`snap_img_id`),
+  CONSTRAINT `order_snap_ibfk_1` FOREIGN KEY (`snap_img_id`) REFERENCES `image` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of order_snap
+-- ----------------------------
+INSERT INTO `order_snap` VALUES ('1543848566', null, '1', 'A0XC30544914384828', '贵妃笑 100克贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑', '39', '11.00', '1000g', '13');
+INSERT INTO `order_snap` VALUES ('1543848566', null, '2', 'A0XC30544914384828', '贵妃笑 100克贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑', '39', '0.01', null, '13');
 
 -- ----------------------------
 -- Table structure for `product`

@@ -85,6 +85,8 @@ class ProductIdValidator(BaseValidator):
         if not isinstance(value.data, list):
             raise ValidationError(message='参数不正确')
         for ids in value.data:
+            if len(ids) == 0:
+                raise ValidationError(message='参数不能为空')
             if 'product_id' not in ids.keys():
                 raise ValidationError(message='product_id参数不存在')
             else:
