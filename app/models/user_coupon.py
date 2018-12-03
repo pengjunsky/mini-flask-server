@@ -26,14 +26,14 @@ class UserCoupon(Base):
         return user_coupon
 
     @staticmethod
-    def get_order_coupon(data, uid):
+    def get_order_coupon(coupon_ids, uid):
         user_coupon = UserCoupon.get_user_coupon_all(uid)
         coupons = []
         total_price = 0
-        for data in data:
-            total_price += data['total']
+        for ids in coupon_ids:
+            total_price += ids['total']
             for i in user_coupon:
-                if data['product_id'] == i.coupon.n_product or data['category_id'] == \
+                if ids['product_id'] == i.coupon.n_product or ids['category_id'] == \
                         i.coupon.n_category or \
                         (total_price > i.coupon.n_price if i.coupon.n_price else None):
                     if i not in coupons:

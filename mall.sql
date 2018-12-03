@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost_3306
-Source Server Version : 50720
+Source Server         : localhost
+Source Server Version : 50505
 Source Host           : localhost:3306
 Source Database       : mall
 
 Target Server Type    : MYSQL
-Target Server Version : 50720
+Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2018-11-22 22:45:47
+Date: 2018-12-03 15:28:26
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -67,13 +67,13 @@ CREATE TABLE `cart` (
   `product_id` int(11) NOT NULL COMMENT '商品ID',
   `property_id` int(11) DEFAULT NULL COMMENT '属性ID',
   `uid` int(11) NOT NULL COMMENT '用户ID',
-  `num` int(11) DEFAULT '1' COMMENT '数量',
+  `qty` int(11) DEFAULT '1' COMMENT '数量',
   PRIMARY KEY (`id`),
   KEY `product_id` (`product_id`),
   KEY `property_id` (`property_id`),
   CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
   CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`property_id`) REFERENCES `product_property` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=120 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=126 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of cart
@@ -81,6 +81,8 @@ CREATE TABLE `cart` (
 INSERT INTO `cart` VALUES ('1542010304', null, '116', '11', '2', '1', '4');
 INSERT INTO `cart` VALUES ('1542289216', '1542642373', '118', '11', '1', '1', '26');
 INSERT INTO `cart` VALUES ('1542290393', '1542637924', '119', '11', null, '1', '5');
+INSERT INTO `cart` VALUES ('1542957747', null, '123', '29', null, '7', '1');
+INSERT INTO `cart` VALUES ('1543212548', '1543373844', '124', '11', '8', '7', '13');
 
 -- ----------------------------
 -- Table structure for `category`
@@ -124,7 +126,32 @@ CREATE TABLE `comment` (
 -- ----------------------------
 -- Records of comment
 -- ----------------------------
-INSERT INTO `comment` VALUES (null, null, '1', '1', '11', '你个哈皮', null);
+INSERT INTO `comment` VALUES (null, null, '1', '1', '11', '你个哈皮', '1');
+
+-- ----------------------------
+-- Table structure for `coupon`
+-- ----------------------------
+DROP TABLE IF EXISTS `coupon`;
+CREATE TABLE `coupon` (
+  `create_time` int(11) DEFAULT NULL,
+  `update_time` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `price` float(6,2) NOT NULL,
+  `title` varchar(24) NOT NULL,
+  `label` varchar(50) NOT NULL,
+  `qty` int(11) DEFAULT NULL,
+  `n_price` int(11) DEFAULT NULL,
+  `n_product` int(11) DEFAULT NULL,
+  `n_category` int(11) DEFAULT NULL,
+  `dead_time` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of coupon
+-- ----------------------------
+INSERT INTO `coupon` VALUES (null, null, '1', '11.00', '全店满减', '优惠卷', '11', '11', null, null, '1544414059');
+INSERT INTO `coupon` VALUES (null, null, '2', '1.00', '生鲜优惠', '生鲜优惠', '11', null, '11', null, '1544414059');
 
 -- ----------------------------
 -- Table structure for `image`
@@ -238,7 +265,7 @@ INSERT INTO `product` VALUES ('7', '泥蒿 半斤', null, '0.01', '0', null, '99
 INSERT INTO `product` VALUES ('8', '夏日芒果 3个', null, '0.01', '0', null, '995', '2', '1528938345', null, null, '36', '0');
 INSERT INTO `product` VALUES ('9', '冬木红枣 500克', null, '0.01', '0', null, '996', '2', '1528938346', null, null, '37', '0');
 INSERT INTO `product` VALUES ('10', '万紫千凤梨 300克', null, '0.01', '0', null, '996', '2', '1528938347', null, null, '38', '0');
-INSERT INTO `product` VALUES ('11', '贵妃笑 100克贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑', '100.00', '0.01', '0', '', '111', '2', '1528938369', null, '新鲜爽口，风味极佳。', '39', '0');
+INSERT INTO `product` VALUES ('11', '贵妃笑 100克贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑', '100.00', '0.01', '0', '', '111', '2', '1528938369', null, '新鲜爽口，风味极佳。', '39', '8');
 INSERT INTO `product` VALUES ('12', '珍奇异果 3个', null, '0.01', '0', null, '999', '2', '1528938349', null, null, '40', '0');
 INSERT INTO `product` VALUES ('13', '绿豆 125克', null, '0.01', '0', null, '999', '7', '1528938350', null, null, '41', '0');
 INSERT INTO `product` VALUES ('14', '芝麻 50克', null, '0.01', '0', null, '999', '7', '1528938351', null, null, '42', '0');
@@ -339,16 +366,17 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `openid` (`openid`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1539848235', '1540623233', '1', 'oapee4lTOfFg1hpx0lQ5x_HcURUM', null, '小毛', '14612.b0.upaiyun.com/2017/12/19/cbe1427840f5c6b4801abcdd8b6a4e18.jpg', '1', null);
+INSERT INTO `user` VALUES ('1539848235', '1540623233', '1', 'oapee4lTOfFg1hpx0lQ5x_HcURUM', null, '小毛', 'http://bmob-cdn-14612.b0.upaiyun.com/2017/12/19/cbe1427840f5c6b4801abcdd8b6a4e18.jpg', '1', null);
 INSERT INTO `user` VALUES ('1539848235', null, '2', null, 'wwe1221@qq.com', 'nihaoe1212', null, '1', 'pbkdf2:sha256:50000$r070DVfB$bbd0d1995a7381c7d5c33cbe8aaa683653b44b3464cea77f4330138095530fce');
 INSERT INTO `user` VALUES ('1540349983', null, '4', null, 'wwe12221@qq.com', 'nihaoe12212', null, '1', 'pbkdf2:sha256:50000$8FLGWA6K$f71dc8cae1ad00cc9ba7bca571400ab40835be02837cf3eb5db9bc9d4f87550b');
 INSERT INTO `user` VALUES ('1540363560', null, '5', null, 'wwe122221@qq.com', 'nihaoe12212', null, '1', 'pbkdf2:sha256:50000$FjAW1u03$cf508e1ff3b562aec3c2eeea6a0bdde4eb678ddd79dba7ae26fbaab49bfd447f');
 INSERT INTO `user` VALUES ('1540622646', null, '6', null, 'wwe1222221@qq.com', 'nihaoe122122', null, '1', 'pbkdf2:sha256:50000$8ibOAwHs$c573ce052f20036efe1af7afb61dd99a03fe45310505afe17b87bc10682af151');
+INSERT INTO `user` VALUES ('1542938193', null, '7', 'oKmzy0FiI1q6tGaZEKs6cyrBzYfo', null, null, null, '1', null);
 
 -- ----------------------------
 -- Table structure for `user_address`
@@ -360,17 +388,36 @@ CREATE TABLE `user_address` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
   `mobile` varchar(20) NOT NULL,
-  `province` varchar(20) DEFAULT NULL,
-  `city` varchar(20) DEFAULT NULL,
-  `country` varchar(20) DEFAULT NULL,
-  `detail` varchar(100) DEFAULT NULL,
+  `detail` varchar(100) NOT NULL,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `user_address_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of user_address
 -- ----------------------------
-INSERT INTO `user_address` VALUES ('1542896410', null, '1', 'xxx', '18888888888', '湖南省', 'xxx市', 'xx县', 'xxx', '1');
+INSERT INTO `user_address` VALUES ('1543819189', null, '3', '张三', '020-81167888', '广东省广州市海珠区新港中路397号', '7');
+
+-- ----------------------------
+-- Table structure for `user_coupon`
+-- ----------------------------
+DROP TABLE IF EXISTS `user_coupon`;
+CREATE TABLE `user_coupon` (
+  `create_time` int(11) DEFAULT NULL,
+  `update_time` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `coupon_id` int(11) NOT NULL,
+  `status` smallint(6) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `coupon_id` (`coupon_id`),
+  CONSTRAINT `user_coupon_ibfk_1` FOREIGN KEY (`coupon_id`) REFERENCES `coupon` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of user_coupon
+-- ----------------------------
+INSERT INTO `user_coupon` VALUES (null, null, '1', '7', '1', '1');
+INSERT INTO `user_coupon` VALUES (null, null, '2', '7', '2', '1');

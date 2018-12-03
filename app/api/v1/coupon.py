@@ -27,5 +27,5 @@ def get_user_coupon():
 def get_order_coupon():
     uid = g.user.uid
     form = OrderCouponValidator().validate_for_api()
-    order_coupon = UserCoupon.get_order_coupon(form.data.data, uid)
+    order_coupon = UserCoupon.get_order_coupon(form.coupon_ids.data, uid)
     return jsonify(order_coupon)

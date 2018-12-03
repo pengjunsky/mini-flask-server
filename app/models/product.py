@@ -25,7 +25,7 @@ class Product(Base):
     postage = Column(Integer, default=0)
 
     def keys(self):
-        self.hide('main_img_id', 'content').append('main_img')
+        self.hide('content').append('main_img')
         return self.fields
 
     @property
@@ -81,7 +81,7 @@ class Product(Base):
     def get_product_detail(id):
         with db.auto_check_empty(ProductException):
             return Product.query.filter_by(id=id).first_or_404() \
-                .append('detail_img', 'banner_img', 'property', 'content', )
+                .append('detail_img', 'banner_img', 'property', 'content', 'main_img_id' )
 
     @staticmethod
     def get_order_product(ids):

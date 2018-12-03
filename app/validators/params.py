@@ -1,11 +1,13 @@
 from wtforms import IntegerField, StringField
-from wtforms.validators import DataRequired, ValidationError
+from wtforms.validators import DataRequired, ValidationError, length
 
 from app.libs.error_code import CartException
 from app.models.base import db
 from app.models.cart import Cart
 from app.models.product import Product
 from app.models.product_property import Product2Property
+from app.models.user_address import UserAddress
+from app.models.user_coupon import UserCoupon
 from app.validators.base import BaseValidator
 
 
@@ -60,26 +62,26 @@ class CartAddValidator(BaseValidator):
 
 
 class CartIdsValidator(BaseValidator):
-    cartIds = StringField(validators=[DataRequired()])
+    cart_ids = StringField(validators=[DataRequired()])
 
-    def validate_cartIds(self, value):
-        cartIds = value.data
-        if not isinstance(cartIds, list):
+    def validate_cart_ids(self, value):
+        cart_ids = value.data
+        if not isinstance(cart_ids, list):
             raise ValidationError(message='购物车参数不正确')
-        if len(cartIds) == 0:
+        if len(cart_ids) == 0:
             raise ValidationError(message='购物车列表不能为空')
-        for cartId in cartIds:
-            if not self.isPositiveInteger(cartId):
+        for cart_id in cart_ids:
+            if not self.isPositiveInteger(cart_id):
                 raise ValidationError(message='购物车列表参数错误')
             else:
                 with db.auto_check_empty(CartException()):
-                    Cart.query.filter_by(id=cartId).first_or_404()
+                    Cart.query.filter_by(id=cart_id).first_or_404()
 
 
 class ProductIdValidator(BaseValidator):
-    ids = StringField(validators=[DataRequired()])
+    product_ids = StringField(validators=[DataRequired()])
 
-    def validate_ids(self, value):
+    def validate_product_ids(self, value):
         if not isinstance(value.data, list):
             raise ValidationError(message='参数不正确')
         for ids in value.data:
@@ -100,24 +102,44 @@ class ProductIdValidator(BaseValidator):
 
 
 class OrderCouponValidator(BaseValidator):
-    data = StringField(validators=[DataRequired()])
+    coupon_ids = StringField(validators=[DataRequired()])
 
-    def validate_data(self, value):
+    def validate_coupon_ids(self, value):
         if not isinstance(value.data, list):
             raise ValidationError(message='参数不正确')
-        for data in value.data:
-            if 'product_id' not in data.keys():
+        for ids in value.data:
+            if 'product_id' not in ids.keys():
                 raise ValidationError(message='product_id参数不存在')
             else:
-                if not self.isPositiveInteger(data['product_id']):
+                if not self.isPositiveInteger(ids['product_id']):
                     raise ValidationError(message='product_id must be positive integer')
-            if 'category_id' not in data.keys():
+            if 'category_id' not in ids.keys():
                 raise ValidationError(message='category_id参数不存在')
             else:
-                if not self.isPositiveInteger(data['category_id']):
+                if not self.isPositiveInteger(ids['category_id']):
                     raise ValidationError(message='category_id must be positive integer')
-            if 'total' not in data.keys():
+            if 'total' not in ids.keys():
                 raise ValidationError(message='total参数不存在')
             else:
-                if not self.isPositivePrice(data['total']):
+                if not self.isPositivePrice(ids['total']):
                     raise ValidationError(message='total must be positive integer')
+
+
+class CreateOrderValidator(ProductIdValidator):
+    address_id = IntegerField(validators=[DataRequired()])
+    user_coupon_id = IntegerField()
+    remark = StringField(validators=[length(max=100, message='最多100个字')])
+
+    def validate_address_id(self, value):
+        if not self.isPositiveInteger(value.data):
+            raise ValidationError(message='address_id must be positive integer')
+        if not UserAddress.query.filter_by(id=value.data).first():
+            raise ValidationError(message='the resource are not found')
+
+    def validate_user_coupon_id(self, value):
+        if not value.data:
+            return
+        if not self.isPositiveInteger(value.data):
+            raise ValidationError(message='user_coupon_id must be positive integer')
+        if not UserCoupon.query.filter_by(id=value.data).first():
+            raise ValidationError(message='the resource are not found')

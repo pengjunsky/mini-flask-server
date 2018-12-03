@@ -31,5 +31,5 @@ def add_cart():
 def del_cart():
     uid = g.user.uid
     form = CartIdsValidator().validate_for_api()
-    Cart.del_cart(uid, form.cartIds.data)
+    Cart.del_cart(uid, form.cart_ids.data)
     return DeleteSuccess()

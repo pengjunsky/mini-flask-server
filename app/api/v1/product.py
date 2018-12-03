@@ -30,6 +30,6 @@ def get_one(id):
 def get_order_product():
     form = ProductIdValidator().validate_for_api()
     o_product = []
-    for ids in form.ids.data:
+    for ids in form.product_ids.data:
         o_product.append(Product.get_order_product(ids))
     return jsonify(o_product)
