@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost_3306
-Source Server Version : 50720
+Source Server         : localhost
+Source Server Version : 50505
 Source Host           : localhost:3306
 Source Database       : mall
 
 Target Server Type    : MYSQL
-Target Server Version : 50720
+Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2018-12-03 22:50:06
+Date: 2018-12-04 16:27:41
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -73,7 +73,7 @@ CREATE TABLE `cart` (
   KEY `property_id` (`property_id`),
   CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
   CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`property_id`) REFERENCES `product_property` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=126 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=127 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of cart
@@ -82,7 +82,8 @@ INSERT INTO `cart` VALUES ('1542010304', null, '116', '11', '2', '1', '4');
 INSERT INTO `cart` VALUES ('1542289216', '1542642373', '118', '11', '1', '1', '26');
 INSERT INTO `cart` VALUES ('1542290393', '1542637924', '119', '11', null, '1', '5');
 INSERT INTO `cart` VALUES ('1542957747', null, '123', '29', null, '7', '1');
-INSERT INTO `cart` VALUES ('1543212548', '1543373844', '124', '11', '8', '7', '13');
+INSERT INTO `cart` VALUES ('1543212548', '1543373844', '124', '11', '8', '7', '11');
+INSERT INTO `cart` VALUES ('1543896123', null, '126', '11', '1', '7', '1');
 
 -- ----------------------------
 -- Table structure for `category`
@@ -244,17 +245,19 @@ CREATE TABLE `order` (
   `total_price` float(6,2) NOT NULL,
   `snap_address` varchar(500) NOT NULL,
   `coupon_price` float(6,2) DEFAULT NULL,
+  `postage` int(11) DEFAULT NULL,
   `remark` varchar(100) DEFAULT NULL,
   `prepay_id` varchar(100) DEFAULT NULL,
   `status` smallint(6) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `order_no` (`order_no`),
-  UNIQUE KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  UNIQUE KEY `order_no` (`order_no`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of order
 -- ----------------------------
+INSERT INTO `order` VALUES ('1543911780', null, '6', 'A0XC44773504391140', '7', '121.11', '张三 020-81167888 广东省广州市海珠区新港中路397号', null, '0', null, null, '1');
+INSERT INTO `order` VALUES ('1543911893', null, '7', 'A0XC42564574391144', '7', '121.11', '张三 020-81167888 广东省广州市海珠区新港中路397号', null, '0', null, null, '1');
 
 -- ----------------------------
 -- Table structure for `order_snap`
@@ -270,16 +273,22 @@ CREATE TABLE `order_snap` (
   `price` float(6,2) NOT NULL,
   `property_name` varchar(30) DEFAULT NULL,
   `count` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `property_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `snap_img_id` (`snap_img_id`),
   CONSTRAINT `order_snap_ibfk_1` FOREIGN KEY (`snap_img_id`) REFERENCES `image` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of order_snap
 -- ----------------------------
-INSERT INTO `order_snap` VALUES ('1543848566', null, '1', 'A0XC30544914384828', '贵妃笑 100克贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑', '39', '11.00', '1000g', '13');
-INSERT INTO `order_snap` VALUES ('1543848566', null, '2', 'A0XC30544914384828', '贵妃笑 100克贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑', '39', '0.01', null, '13');
+INSERT INTO `order_snap` VALUES ('1543911782', null, '22', 'A0XC44773504391140', '冰心鸡蛋 2个', '59', '0.01', null, '1', '29', null);
+INSERT INTO `order_snap` VALUES ('1543911782', null, '23', 'A0XC44773504391140', '贵妃笑 100克贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑', '39', '11.00', '1000g', '11', '11', '8');
+INSERT INTO `order_snap` VALUES ('1543911782', null, '24', 'A0XC44773504391140', '贵妃笑 100克贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑', '39', '0.10', '500g', '1', '11', '1');
+INSERT INTO `order_snap` VALUES ('1543911893', null, '25', 'A0XC42564574391144', '冰心鸡蛋 2个', '59', '0.01', null, '1', '29', null);
+INSERT INTO `order_snap` VALUES ('1543911893', null, '26', 'A0XC42564574391144', '贵妃笑 100克贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑', '39', '11.00', '1000g', '11', '11', '8');
+INSERT INTO `order_snap` VALUES ('1543911893', null, '27', 'A0XC42564574391144', '贵妃笑 100克贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑', '39', '0.10', '500g', '1', '11', '1');
 
 -- ----------------------------
 -- Table structure for `product`
@@ -332,7 +341,7 @@ INSERT INTO `product` VALUES ('25', '小明的妙脆角 120克', null, '0.01', '
 INSERT INTO `product` VALUES ('26', '红衣青瓜 混搭160克', null, '0.01', '0', null, '999', '2', '1528938362', null, null, '56', '0');
 INSERT INTO `product` VALUES ('27', '锈色瓜子 100克', null, '0.01', '0', null, '998', '4', '1528938363', null, null, '57', '0');
 INSERT INTO `product` VALUES ('28', '春泥花生 200克', null, '0.01', '0', null, '999', '4', '1528938364', null, null, '58', '0');
-INSERT INTO `product` VALUES ('29', '冰心鸡蛋 2个', null, '0.01', '0', null, '999', '7', '1528938365', null, null, '59', '0');
+INSERT INTO `product` VALUES ('29', '冰心鸡蛋 2个', null, '0.01', '0', null, '996', '7', '1528938365', null, null, '59', '0');
 INSERT INTO `product` VALUES ('30', '八宝莲子 200克', null, '0.01', '0', null, '999', '7', '1528938366', null, null, '14', '0');
 INSERT INTO `product` VALUES ('31', '深涧木耳 78克', null, '0.01', '0', null, '999', '7', '1528938367', null, null, '60', '0');
 INSERT INTO `product` VALUES ('32', '土豆 半斤', null, '0.01', '0', null, '999', '3', '1528938368', null, null, '66', '0');
@@ -391,13 +400,13 @@ CREATE TABLE `product_property` (
 -- ----------------------------
 -- Records of product_property
 -- ----------------------------
-INSERT INTO `product_property` VALUES (null, null, '1', '500g', '0.10', '11', '11');
+INSERT INTO `product_property` VALUES (null, null, '1', '500g', '0.10', '8', '11');
 INSERT INTO `product_property` VALUES (null, null, '2', '1000g', '0.10', '111', '11');
 INSERT INTO `product_property` VALUES (null, null, '4', '1000g', '1.00', '0', '11');
 INSERT INTO `product_property` VALUES (null, null, '5', '1000g', '1.00', '0', '11');
 INSERT INTO `product_property` VALUES (null, null, '6', '1000g', '1.00', '1', '11');
 INSERT INTO `product_property` VALUES (null, null, '7', '1000g', '1.00', '0', '11');
-INSERT INTO `product_property` VALUES (null, null, '8', '1000g', '11.00', '11', '11');
+INSERT INTO `product_property` VALUES (null, null, '8', '1000g', '11.00', '100', '11');
 
 -- ----------------------------
 -- Table structure for `user`
