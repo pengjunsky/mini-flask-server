@@ -88,15 +88,17 @@ class Product(Base):
         with db.auto_check_empty(ProductException):
             product = dict(Product.query.filter_by(id=ids['product_id']).first_or_404().hide(
                 'originalPrice', 'sale', 'summary'))
+        product['qty'] = ids['qty']
         if 'property_id' in ids.keys():
             if ids['property_id']:
                 with db.auto_check_empty(PropertyException):
                     product['property'] = dict(Product2Property.query.filter_by(id=ids['property_id']).first_or_404())
+                if product['qty'] > product['property']['stock']:
+                    raise StockException(msg=str(product['id']) + '库存不足')
             else:
                 product['property'] = None
         else:
             product['property'] = None
-        product['qty'] = ids['qty']
-        if product['qty'] > product['stock']:
-            raise StockException(msg=product['name']+'库存不足')
+            if product['qty'] > product['stock']:
+                raise StockException(str(msg=product['id']) + '库存不足')
         return product
