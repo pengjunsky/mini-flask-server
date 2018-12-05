@@ -22,7 +22,7 @@ class OrderSnap(Base):
 
     @property
     def snap_img(self):
-        return Image.get_img_by_id(self.main_img_id).url
+        return Image.get_img_by_id(self.snap_img_id).url
 
     @staticmethod
     def add_order_snap(o_products, order_no):
