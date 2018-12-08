@@ -3,15 +3,33 @@ from app.libs.redprint import RedPrint
 from app.libs.token_auth import auth
 from app.models.order import Order
 from app.models.order_snap import OrderSnap
+from app.models.user import User
+from app.service.wxpay import WxPay
 from app.validators.params import CreateOrderValidator
 
 api = RedPrint('order')
 
 
-@api.route('/<string:oid>', methods=['GET', 'POST'])
+@api.route('/<string:oid>', methods=['GET'])
 def get_one_order(oid):
     order = Order.get_one_order(oid)
     return jsonify(order)
+
+
+@api.route('/pay/<string:oid>', methods=['GET'])
+@auth.login_required
+def get_pay_order(oid):
+    uid = g.user.uid
+    user = User.query.filter_by(id=uid).first().append('openid')
+    order = Order.get_one_order(oid)
+    wx_pay = WxPay(oid, user.openid, order.pay_price)
+    pay_info = wx_pay.get_pay_info()
+    return jsonify(pay_info)
+
+
+@api.route('/pay/notify', methods=['POST'])
+def get_pay_notify():
+    pass
 
 
 @api.route('/create', methods=['POST'])

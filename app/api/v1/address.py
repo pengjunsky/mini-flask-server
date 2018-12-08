@@ -28,4 +28,5 @@ def renew_address():
     with db.auto_check_empty(UserException):
         user = User.query.filter_by(id=uid).first_or_404()
     user.save_address(address_info, uid)
-    return RenewSuccess()
+    user_address = UserAddress.query.filter_by(user_id=uid).first()
+    return jsonify(user_address)
