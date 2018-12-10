@@ -1,10 +1,11 @@
 from flask import g, jsonify
 from app.libs.redprint import RedPrint
 from app.libs.token_auth import auth
+from app.models.base import db
 from app.models.order import Order
 from app.models.order_snap import OrderSnap
 from app.models.user import User
-from app.service.wxpay import WxPay
+from app.service.wxpay import UnifiedOrder, OrderQuery
 from app.validators.params import CreateOrderValidator
 
 api = RedPrint('order')
@@ -22,8 +23,19 @@ def get_pay_order(oid):
     uid = g.user.uid
     user = User.query.filter_by(id=uid).first().append('openid')
     order = Order.get_one_order(oid)
-    wx_pay = WxPay(oid, user.openid, order.pay_price)
+    wx_pay = UnifiedOrder(oid, user.openid, order.pay_price)
     pay_info = wx_pay.get_pay_info()
+    return jsonify(pay_info)
+
+
+@api.route('/pay/query/<string:oid>', methods=['GET', 'POST'])
+def get_pay_query(oid):
+    pay_info = OrderQuery(oid).get_pay_info()
+    if pay_info['trade_state'] == 'SUCCESS':
+        with db.auto_commit():
+            order = Order.get_one_order(oid)
+            order.transaction_id = pay_info['trade_state']
+            order.status = 2
     return jsonify(pay_info)
 
 

@@ -23,7 +23,7 @@ class Order(Base):
     coupon_price = Column(FLOAT(precision=6, scale=2), default=0)
     postage = Column(Integer, default=0)
     remark = Column(String(100))
-    prepay_id = Column(String(100))
+    transaction_id = Column(String(100))
     status = Column(SmallInteger, default=1, nullable=False)  # '1:未支付， 2：已支付，3：已发货 , 4: 已支付，但库存不足'
 
     def keys(self):
