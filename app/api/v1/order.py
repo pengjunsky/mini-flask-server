@@ -1,4 +1,6 @@
 from flask import g, jsonify
+
+from app.libs.error_code import Success, UserException
 from app.libs.redprint import RedPrint
 from app.libs.token_auth import auth
 from app.models.base import db
@@ -31,12 +33,15 @@ def get_pay_order(oid):
 @api.route('/pay/query/<string:oid>', methods=['GET', 'POST'])
 def get_pay_query(oid):
     pay_info = OrderQuery(oid).get_pay_info()
-    if pay_info['trade_state'] == 'SUCCESS':
+    if pay_info['result_code'] == 'FAIL':
+        return UserException(msg=pay_info['err_code'])
+    elif pay_info['trade_state'] == 'SUCCESS':
         with db.auto_commit():
             order = Order.get_one_order(oid)
-            order.transaction_id = pay_info['trade_state']
+            order.transaction_id = pay_info['transaction_id']
             order.status = 2
-    return jsonify(pay_info)
+        return Success(msg=pay_info['trade_state_desc'])
+    return Success(msg=pay_info['trade_state_desc'])
 
 
 @api.route('/pay/notify', methods=['POST'])

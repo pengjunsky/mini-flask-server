@@ -28,7 +28,7 @@ class ServerError(APIException):
 class WeChatException(ServerError):
     code = 500
     msg = '微信服务器接口调用失败'
-    error_code = 999
+    error_code = 998
 
 
 class ParameterException(APIException):
@@ -70,40 +70,35 @@ class NotFound(APIException):
 class UserException(NotFound):
     code = 404
     msg = '指定的用户不存在，请检查参数'
-    error_code = 2000
+    error_code = 1002
 
 
 class ProductException(NotFound):
     code = 404
     msg = '指定的商品不存在，请检查参数'
-    error_code = 3000
+    error_code = 1003
 
 
 class PropertyException(NotFound):
     code = 404
     msg = '指定的商品规格不存在，请检查参数'
-    error_code = 3001
+    error_code = 1004
 
 
 class BannerMissException(NotFound):
     code = 404
     msg = '请求的Banner不存在'
-    error_code = 4000
+    error_code = 1005
 
 
 class CategoryException(NotFound):
     code = 404
     msg = '指定的类目不存在, 请检查参数'
-    error_code = 5000
+    error_code = 1006
 
 
 class CartException(NotFound):
     code = 404
     msg = '购物车商品不存在, 请检查参数'
-    error_code = 6000
+    error_code = 1007
 
-
-class UserException(NotFound):
-    code = 400
-    msg = '用户不存在'
-    error_code = 7000

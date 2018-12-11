@@ -116,7 +116,6 @@ class Order(Base):
                 user_coupon = UserCoupon.query.filter(and_(UserCoupon.id == user_coupon_id,
                                                            UserCoupon.status == 1)).first()
                 user_coupon.status = 0
-                db.session.add(user_coupon)
 
     @staticmethod
     def get_one_order(oid):
