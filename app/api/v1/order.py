@@ -5,9 +5,8 @@ from app.libs.redprint import RedPrint
 from app.libs.token_auth import auth
 from app.models.base import db
 from app.models.order import Order
-from app.models.order_snap import OrderSnap
 from app.models.user import User
-from app.service.wxpay import UnifiedOrder, OrderQuery
+from app.service.wxpay import UnifiedOrder, OrderQuery, CloseOrder
 from app.validators.params import CreateOrderValidator
 
 api = RedPrint('order')
@@ -32,7 +31,7 @@ def get_pay_order(oid):
 
 @api.route('/pay/query/<string:oid>', methods=['GET', 'POST'])
 def get_pay_query(oid):
-    pay_info = OrderQuery(oid).get_pay_info()
+    pay_info = OrderQuery(oid).get_order_info()
     if pay_info['result_code'] == 'FAIL':
         return UserException(msg=pay_info['err_code'])
     elif pay_info['trade_state'] == 'SUCCESS':
@@ -41,7 +40,15 @@ def get_pay_query(oid):
             order.transaction_id = pay_info['transaction_id']
             order.status = 2
         return Success(msg=pay_info['trade_state_desc'])
-    return Success(msg=pay_info['trade_state_desc'])
+    return UserException(msg=pay_info['trade_state_desc'])
+
+
+@api.route('/pay/close/<string:oid>', methods=['GET', 'POST'])
+def get_pay_close(oid):
+    pay_info = CloseOrder(oid).get_close_info()
+    if pay_info['result_code'] == 'FAIL':
+        return UserException(msg=pay_info['err_code'])
+    return Success(msg='订单已关闭')
 
 
 @api.route('/pay/notify', methods=['POST'])

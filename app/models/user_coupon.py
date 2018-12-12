@@ -33,9 +33,9 @@ class UserCoupon(Base):
         for ids in coupon_ids:
             total_price += ids['total']
             for i in user_coupon:
-                if ids['product_id'] == i.coupon.n_product or ids['category_id'] == \
+                if total_price >= i.coupon.price and (ids['product_id'] == i.coupon.n_product or ids['category_id'] == \
                         i.coupon.n_category or \
-                        (total_price > i.coupon.n_price if i.coupon.n_price else None):
+                        (total_price > i.coupon.n_price if i.coupon.n_price else None)):
                     if i not in coupons:
                         coupons.append(i)
         return coupons

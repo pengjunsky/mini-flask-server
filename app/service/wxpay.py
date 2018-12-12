@@ -59,7 +59,7 @@ class UnifiedOrder(Base):
             'spbill_create_ip': current_app.config['LOCAL_IP'],
             'notify_url': current_app.config['NOTIFY_URL'],
             'trade_type': current_app.config['TRADE_TYPE'],
-            'openid': openid
+            'openid': openid,
         }
 
     def get_pay_info(self):
@@ -101,12 +101,39 @@ class OrderQuery(Base):
             'nonce_str': self.get_nonce_str(),
         }
 
-    def get_pay_info(self):
+    def get_order_info(self):
         sign = self.create_sign(self.pay_data)
         self.pay_data['sign'] = sign
         xml_data = self.dict_to_xml(self.pay_data)
         headers = {'Content-Type': 'application/xml'}
         response = Http.post(self.order_query_url, xml_data, headers, return_json=False)
+        if response:
+            wx_result = self.xml_to_dict(response)
+            if wx_result.get('return_code') == 'FAIL':
+                self.process_login_error(wx_result)
+            else:
+                return wx_result
+        else:
+            raise Exception()
+
+
+class CloseOrder(Base):
+    # 关闭订单功能类
+    def __init__(self, oid):
+        self.close_order_url = current_app.config['CLOSE_ORDER']
+        self.pay_data = {
+            'appid': current_app.config['APP_ID'],
+            'mch_id': current_app.config['MCH_ID'],
+            'out_trade_no': oid,  # 商户订单号
+            'nonce_str': self.get_nonce_str(),
+        }
+
+    def get_close_info(self):
+        sign = self.create_sign(self.pay_data)
+        self.pay_data['sign'] = sign
+        xml_data = self.dict_to_xml(self.pay_data)
+        headers = {'Content-Type': 'application/xml'}
+        response = Http.post(self.close_order_url, xml_data, headers, return_json=False)
         if response:
             wx_result = self.xml_to_dict(response)
             if wx_result.get('return_code') == 'FAIL':
