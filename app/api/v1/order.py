@@ -17,6 +17,14 @@ def get_one_order(oid):
     return jsonify(order)
 
 
+@api.route('', methods=['GET'])
+@auth.login_required
+def get_my_order():
+    uid = g.user.uid
+    order = Order.get_user_order(uid)
+    return jsonify(order)
+
+
 @api.route('/pay/<string:oid>', methods=['GET'])
 @auth.login_required
 def get_pay_order(oid):
@@ -44,9 +52,16 @@ def get_pay_query(oid):
 
 @api.route('/pay/close/<string:oid>', methods=['GET', 'POST'])
 def get_pay_close(oid):
+    order_info = OrderQuery(oid).get_order_info()
+    if order_info['result_code'] == 'FAIL':
+        return UserException(msg=order_info['err_code'])
+    elif order_info['trade_state'] == 'CLOSED':
+        return Success(msg=order_info['trade_state_desc'])
     pay_info = CloseOrder(oid).get_close_info()
     if pay_info['result_code'] == 'FAIL':
         return UserException(msg=pay_info['err_code'])
+    order = dict(Order.get_one_order(oid))
+    Order.restore_product_stock(order['snap_product'])
     return Success(msg='订单已关闭')
 
 
@@ -76,5 +91,4 @@ def create_order():
     form = CreateOrderValidator().validate_for_api()
     order_no = Order.create_order(form.product_ids.data, form.address_id.data,
                                   form.user_coupon_id.data, form.remark.data, uid)
-
     return jsonify(order_no)

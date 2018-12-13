@@ -107,7 +107,18 @@ class Order(Base):
                 else:
                     product = Product.query.filter_by(id=i['id']).first_or_404()
                     product.stock -= i['qty']
-                    db.session.add(product)
+
+    @staticmethod
+    def restore_product_stock(o_products):
+        for i in o_products:
+            with db.auto_commit():
+                if i['property_id']:
+                    product_property = Product2Property.query.filter_by(id=i['property_id']).first_or_404()
+                    product_property.stock += i['count']
+                    db.session.add(product_property)
+                else:
+                    product = Product.query.filter_by(id=i['product_id']).first_or_404()
+                    product.stock += i['count']
 
     @staticmethod
     def __revise_user_coupon(user_coupon_id):
@@ -121,3 +132,8 @@ class Order(Base):
     def get_one_order(oid):
         with db.auto_commit():
             return Order.query.filter_by(order_no=oid).first_or_404()
+
+    @staticmethod
+    def get_user_order(uid):
+        with db.auto_commit():
+            return Order.query.filter_by(user_id=uid).all()
