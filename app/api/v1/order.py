@@ -1,12 +1,11 @@
-from flask import g, jsonify
-
+from flask import g, jsonify, request
 from app.libs.error_code import Success, UserException
 from app.libs.redprint import RedPrint
 from app.libs.token_auth import auth
 from app.models.base import db
 from app.models.order import Order
 from app.models.user import User
-from app.service.wxpay import UnifiedOrder, OrderQuery, CloseOrder
+from app.service.wxpay import UnifiedOrder, OrderQuery, CloseOrder, Base
 from app.validators.params import CreateOrderValidator
 
 api = RedPrint('order')
@@ -53,7 +52,21 @@ def get_pay_close(oid):
 
 @api.route('/pay/notify', methods=['POST'])
 def get_pay_notify():
-    pass
+    if request.method == 'POST':
+        pay_info = Base.xml_to_dict(request.data)
+        if pay_info['return_code'] == 'SUCCESS':
+            if pay_info['result_code'] == 'SUCCESS':
+                if pay_info['trade_state'] == 'SUCCESS':
+                    with db.auto_commit():
+                        order = Order.get_one_order(pay_info['out_trade_no'])
+                        if int(order.pay_price * 100) == pay_info['settlement_total_fee']:
+                            order.transaction_id = pay_info['transaction_id']
+                            order.status = 2
+                            result_data = {
+                                'return_code': 'SUCCESS',
+                                'return_msg': 'OK'
+                            }
+                            return Base.dict_to_xml(result_data), {'Content-Type': 'application/xml'}
 
 
 @api.route('/create', methods=['POST'])
