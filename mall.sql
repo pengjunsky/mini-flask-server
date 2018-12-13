@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2018-12-04 16:27:41
+Date: 2018-12-13 16:30:42
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -73,17 +73,11 @@ CREATE TABLE `cart` (
   KEY `property_id` (`property_id`),
   CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
   CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`property_id`) REFERENCES `product_property` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=127 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=124 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of cart
 -- ----------------------------
-INSERT INTO `cart` VALUES ('1542010304', null, '116', '11', '2', '1', '4');
-INSERT INTO `cart` VALUES ('1542289216', '1542642373', '118', '11', '1', '1', '26');
-INSERT INTO `cart` VALUES ('1542290393', '1542637924', '119', '11', null, '1', '5');
-INSERT INTO `cart` VALUES ('1542957747', null, '123', '29', null, '7', '1');
-INSERT INTO `cart` VALUES ('1543212548', '1543373844', '124', '11', '8', '7', '11');
-INSERT INTO `cart` VALUES ('1543896123', null, '126', '11', '1', '7', '1');
 
 -- ----------------------------
 -- Table structure for `category`
@@ -151,8 +145,8 @@ CREATE TABLE `coupon` (
 -- ----------------------------
 -- Records of coupon
 -- ----------------------------
-INSERT INTO `coupon` VALUES (null, null, '1', '11.00', '全店满减', '优惠卷', '11', '11', null, null, '1544414059');
-INSERT INTO `coupon` VALUES (null, null, '2', '1.00', '生鲜优惠', '生鲜优惠', '11', null, '11', null, '1544414059');
+INSERT INTO `coupon` VALUES (null, null, '1', '1.00', '全店满减', '优惠卷', '11', '11', null, null, '1545515390');
+INSERT INTO `coupon` VALUES (null, null, '2', '1.00', '生鲜优惠', '生鲜优惠', '11', null, '11', null, '1545515390');
 
 -- ----------------------------
 -- Table structure for `image`
@@ -243,21 +237,41 @@ CREATE TABLE `order` (
   `order_no` varchar(20) NOT NULL,
   `user_id` int(11) NOT NULL,
   `total_price` float(6,2) NOT NULL,
+  `pay_price` float(6,2) NOT NULL,
   `snap_address` varchar(500) NOT NULL,
   `coupon_price` float(6,2) DEFAULT NULL,
   `postage` int(11) DEFAULT NULL,
   `remark` varchar(100) DEFAULT NULL,
-  `prepay_id` varchar(100) DEFAULT NULL,
+  `transaction_id` varchar(100) DEFAULT NULL,
   `status` smallint(6) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `order_no` (`order_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of order
 -- ----------------------------
-INSERT INTO `order` VALUES ('1543911780', null, '6', 'A0XC44773504391140', '7', '121.11', '张三 020-81167888 广东省广州市海珠区新港中路397号', null, '0', null, null, '1');
-INSERT INTO `order` VALUES ('1543911893', null, '7', 'A0XC42564574391144', '7', '121.11', '张三 020-81167888 广东省广州市海珠区新港中路397号', null, '0', null, null, '1');
+INSERT INTO `order` VALUES ('1543995170', null, '18', 'A0XC515951443995214', '7', '7.07', '7.07', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, null, '1');
+INSERT INTO `order` VALUES ('1543995551', null, '19', 'A0XC551056243995645', '7', '1.00', '9.00', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '8', null, null, '1');
+INSERT INTO `order` VALUES ('1543995578', null, '20', 'A0XC504134643995694', '7', '0.01', '0.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, null, '1');
+INSERT INTO `order` VALUES ('1544060799', null, '21', 'A0XC614363444060839', '7', '1.00', '9.00', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '8', null, null, '1');
+INSERT INTO `order` VALUES ('1544237341', null, '22', 'A0XC878803644237227', '7', '0.01', '0.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, null, '1');
+INSERT INTO `order` VALUES ('1544237390', null, '23', 'A0XC873445244237137', '7', '0.01', '0.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, null, '1');
+INSERT INTO `order` VALUES ('1544253753', null, '24', 'A0XC844143544253505', '1', '0.01', '0.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, null, '1');
+INSERT INTO `order` VALUES ('1544255649', null, '25', 'A0XC890944044255506', '1', '0.01', '0.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, null, '1');
+INSERT INTO `order` VALUES ('1544255718', null, '26', 'A0XC848239044255952', '1', '0.01', '0.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, '4200000234201812088619363173', '2');
+INSERT INTO `order` VALUES ('1544412145', null, '28', 'A0XC1031226244412426', '1', '0.03', '0.03', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, null, '1');
+INSERT INTO `order` VALUES ('1544412902', null, '29', 'A0XC1045825244412863', '1', '0.01', '0.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, null, '1');
+INSERT INTO `order` VALUES ('1544514390', null, '30', 'A0XC1199061144514506', '1', '0.10', '8.10', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '8', null, null, '1');
+INSERT INTO `order` VALUES ('1544514520', null, '31', 'A0XC1104289444514653', '1', '22.00', '19.00', '张三 020-81167888 广东省广州市海珠区新港中路397号', '11.00', '8', null, null, '1');
+INSERT INTO `order` VALUES ('1544578181', null, '32', 'A0XC1251484244578384', '1', '22.00', '30.00', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '8', null, null, '1');
+INSERT INTO `order` VALUES ('1544598791', null, '33', 'A0XC1265821944598217', '1', '0.01', '0.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, null, '1');
+INSERT INTO `order` VALUES ('1544682886', null, '34', 'A0XC1340023244682271', '1', '0.01', '0.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, '4200000233201812130405713980', '2');
+INSERT INTO `order` VALUES ('1544682936', null, '35', 'A0XC1376010044682110', '1', '0.01', '0.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, null, '1');
+INSERT INTO `order` VALUES ('1544684263', null, '36', 'A0XC1312917944684601', '1', '0.01', '0.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, '4200000231201812132971642022', '2');
+INSERT INTO `order` VALUES ('1544684497', null, '37', 'A0XC1346994344684970', '1', '0.01', '0.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, null, '1');
+INSERT INTO `order` VALUES ('1544684552', null, '38', 'A0XC1395552444684992', '1', '0.01', '0.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, null, '1');
+INSERT INTO `order` VALUES ('1544684698', null, '39', 'A0XC1367765944684429', '1', '0.01', '0.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, null, '1');
 
 -- ----------------------------
 -- Table structure for `order_snap`
@@ -278,17 +292,35 @@ CREATE TABLE `order_snap` (
   PRIMARY KEY (`id`),
   KEY `snap_img_id` (`snap_img_id`),
   CONSTRAINT `order_snap_ibfk_1` FOREIGN KEY (`snap_img_id`) REFERENCES `image` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of order_snap
 -- ----------------------------
-INSERT INTO `order_snap` VALUES ('1543911782', null, '22', 'A0XC44773504391140', '冰心鸡蛋 2个', '59', '0.01', null, '1', '29', null);
-INSERT INTO `order_snap` VALUES ('1543911782', null, '23', 'A0XC44773504391140', '贵妃笑 100克贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑', '39', '11.00', '1000g', '11', '11', '8');
-INSERT INTO `order_snap` VALUES ('1543911782', null, '24', 'A0XC44773504391140', '贵妃笑 100克贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑', '39', '0.10', '500g', '1', '11', '1');
-INSERT INTO `order_snap` VALUES ('1543911893', null, '25', 'A0XC42564574391144', '冰心鸡蛋 2个', '59', '0.01', null, '1', '29', null);
-INSERT INTO `order_snap` VALUES ('1543911893', null, '26', 'A0XC42564574391144', '贵妃笑 100克贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑', '39', '11.00', '1000g', '11', '11', '8');
-INSERT INTO `order_snap` VALUES ('1543911893', null, '27', 'A0XC42564574391144', '贵妃笑 100克贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑', '39', '0.10', '500g', '1', '11', '1');
+INSERT INTO `order_snap` VALUES ('1543995170', null, '29', 'A0XC515951443995214', '贵妃笑 100克贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑', '39', '1.00', '1000g', '7', '11', '7');
+INSERT INTO `order_snap` VALUES ('1543995170', null, '30', 'A0XC515951443995214', '锈色瓜子 100克', '57', '0.01', null, '3', '27', null);
+INSERT INTO `order_snap` VALUES ('1543995170', null, '31', 'A0XC515951443995214', '红衣青瓜 混搭160克', '56', '0.01', null, '4', '26', null);
+INSERT INTO `order_snap` VALUES ('1543995551', null, '32', 'A0XC551056243995645', '贵妃笑 100克贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑', '39', '1.00', '1000g', '1', '11', '7');
+INSERT INTO `order_snap` VALUES ('1543995578', null, '33', 'A0XC504134643995694', '冰心鸡蛋 2个', '59', '0.01', null, '1', '29', null);
+INSERT INTO `order_snap` VALUES ('1544060799', null, '34', 'A0XC614363444060839', '贵妃笑 100克贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑', '39', '1.00', '1000g', '1', '11', '7');
+INSERT INTO `order_snap` VALUES ('1544237341', null, '35', 'A0XC878803644237227', '万紫千凤梨 300克', '38', '0.01', null, '1', '10', null);
+INSERT INTO `order_snap` VALUES ('1544237390', null, '36', 'A0XC873445244237137', '土豆 半斤', '66', '0.01', null, '1', '32', null);
+INSERT INTO `order_snap` VALUES ('1544253753', null, '37', 'A0XC844143544253505', '梅兰清花糕 1个', '54', '0.01', null, '1', '22', null);
+INSERT INTO `order_snap` VALUES ('1544255649', null, '38', 'A0XC890944044255506', '春泥花生 200克', '58', '0.01', null, '1', '28', null);
+INSERT INTO `order_snap` VALUES ('1544255718', null, '39', 'A0XC848239044255952', '土豆 半斤', '66', '0.01', null, '1', '32', null);
+INSERT INTO `order_snap` VALUES ('1544408412', null, '40', 'A0XC1040292244408974', '土豆 半斤', '66', '0.01', null, '1', '32', null);
+INSERT INTO `order_snap` VALUES ('1544412145', null, '41', 'A0XC1031226244412426', '红衣青瓜 混搭160克', '56', '0.01', null, '3', '26', null);
+INSERT INTO `order_snap` VALUES ('1544412902', null, '42', 'A0XC1045825244412863', '小明的妙脆角 120克', '52', '0.01', null, '1', '25', null);
+INSERT INTO `order_snap` VALUES ('1544514390', null, '43', 'A0XC1199061144514506', '贵妃笑 100克贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑', '39', '0.10', '500g', '1', '11', '1');
+INSERT INTO `order_snap` VALUES ('1544514520', null, '44', 'A0XC1104289444514653', '贵妃笑 100克贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑', '39', '11.00', '1000g', '2', '11', '8');
+INSERT INTO `order_snap` VALUES ('1544578181', null, '45', 'A0XC1251484244578384', '贵妃笑 100克贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑', '39', '11.00', '1000g', '2', '11', '8');
+INSERT INTO `order_snap` VALUES ('1544598791', null, '46', 'A0XC1265821944598217', '深涧木耳 78克', '60', '0.01', null, '1', '31', null);
+INSERT INTO `order_snap` VALUES ('1544682886', null, '47', 'A0XC1340023244682271', '碧螺春 12克*3袋', '47', '0.01', null, '1', '20', null);
+INSERT INTO `order_snap` VALUES ('1544682936', null, '48', 'A0XC1376010044682110', '西湖龙井 8克*3袋', '48', '0.01', null, '1', '21', null);
+INSERT INTO `order_snap` VALUES ('1544684263', null, '49', 'A0XC1312917944684601', '冰心鸡蛋 2个', '59', '0.01', null, '1', '29', null);
+INSERT INTO `order_snap` VALUES ('1544684497', null, '50', 'A0XC1346994344684970', '深涧木耳 78克', '60', '0.01', null, '1', '31', null);
+INSERT INTO `order_snap` VALUES ('1544684552', null, '51', 'A0XC1395552444684992', '深涧木耳 78克', '60', '0.01', null, '1', '31', null);
+INSERT INTO `order_snap` VALUES ('1544684698', null, '52', 'A0XC1367765944684429', '锈色瓜子 100克', '57', '0.01', null, '1', '27', null);
 
 -- ----------------------------
 -- Table structure for `product`
@@ -323,7 +355,7 @@ INSERT INTO `product` VALUES ('6', '小红的猪耳朵 120克', null, '0.01', '0
 INSERT INTO `product` VALUES ('7', '泥蒿 半斤', null, '0.01', '0', null, '998', '3', '1528938344', null, null, '68', '0');
 INSERT INTO `product` VALUES ('8', '夏日芒果 3个', null, '0.01', '0', null, '995', '2', '1528938345', null, null, '36', '0');
 INSERT INTO `product` VALUES ('9', '冬木红枣 500克', null, '0.01', '0', null, '996', '2', '1528938346', null, null, '37', '0');
-INSERT INTO `product` VALUES ('10', '万紫千凤梨 300克', null, '0.01', '0', null, '996', '2', '1528938347', null, null, '38', '0');
+INSERT INTO `product` VALUES ('10', '万紫千凤梨 300克', null, '0.01', '0', null, '995', '2', '1528938347', null, null, '38', '0');
 INSERT INTO `product` VALUES ('11', '贵妃笑 100克贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑', '100.00', '0.01', '0', '', '111', '2', '1528938369', null, '新鲜爽口，风味极佳。', '39', '8');
 INSERT INTO `product` VALUES ('12', '珍奇异果 3个', null, '0.01', '0', null, '999', '2', '1528938349', null, null, '40', '0');
 INSERT INTO `product` VALUES ('13', '绿豆 125克', null, '0.01', '0', null, '999', '7', '1528938350', null, null, '41', '0');
@@ -333,18 +365,18 @@ INSERT INTO `product` VALUES ('16', '西红柿 1斤', null, '0.01', '0', null, '
 INSERT INTO `product` VALUES ('17', '油炸花生 300克', null, '0.01', '0', null, '999', '4', '1528938354', null, null, '44', '0');
 INSERT INTO `product` VALUES ('18', '春泥西瓜子 128克', null, '0.01', '0', null, '997', '4', '1528938355', null, null, '45', '0');
 INSERT INTO `product` VALUES ('19', '碧水葵花籽 128克', null, '0.01', '0', null, '999', '4', '1528938356', null, null, '46', '0');
-INSERT INTO `product` VALUES ('20', '碧螺春 12克*3袋', null, '0.01', '0', null, '999', '6', '1528938357', null, null, '47', '0');
-INSERT INTO `product` VALUES ('21', '西湖龙井 8克*3袋', null, '0.01', '0', null, '998', '6', '1528938358', null, null, '48', '0');
-INSERT INTO `product` VALUES ('22', '梅兰清花糕 1个', null, '0.01', '0', null, '997', '5', '1528938359', null, null, '54', '0');
+INSERT INTO `product` VALUES ('20', '碧螺春 12克*3袋', null, '0.01', '0', null, '998', '6', '1528938357', null, null, '47', '0');
+INSERT INTO `product` VALUES ('21', '西湖龙井 8克*3袋', null, '0.01', '0', null, '997', '6', '1528938358', null, null, '48', '0');
+INSERT INTO `product` VALUES ('22', '梅兰清花糕 1个', null, '0.01', '0', null, '996', '5', '1528938359', null, null, '54', '0');
 INSERT INTO `product` VALUES ('23', '清凉薄荷糕 1个', null, '0.01', '0', null, '998', '5', '1528938360', null, null, '55', '0');
-INSERT INTO `product` VALUES ('25', '小明的妙脆角 120克', null, '0.01', '0', null, '999', '5', '1528938361', null, null, '52', '0');
-INSERT INTO `product` VALUES ('26', '红衣青瓜 混搭160克', null, '0.01', '0', null, '999', '2', '1528938362', null, null, '56', '0');
-INSERT INTO `product` VALUES ('27', '锈色瓜子 100克', null, '0.01', '0', null, '998', '4', '1528938363', null, null, '57', '0');
-INSERT INTO `product` VALUES ('28', '春泥花生 200克', null, '0.01', '0', null, '999', '4', '1528938364', null, null, '58', '0');
-INSERT INTO `product` VALUES ('29', '冰心鸡蛋 2个', null, '0.01', '0', null, '996', '7', '1528938365', null, null, '59', '0');
+INSERT INTO `product` VALUES ('25', '小明的妙脆角 120克', null, '0.01', '0', null, '998', '5', '1528938361', null, null, '52', '0');
+INSERT INTO `product` VALUES ('26', '红衣青瓜 混搭160克', null, '0.01', '0', null, '992', '2', '1528938362', null, null, '56', '0');
+INSERT INTO `product` VALUES ('27', '锈色瓜子 100克', null, '0.01', '0', null, '994', '4', '1528938363', null, null, '57', '0');
+INSERT INTO `product` VALUES ('28', '春泥花生 200克', null, '0.01', '0', null, '998', '4', '1528938364', null, null, '58', '0');
+INSERT INTO `product` VALUES ('29', '冰心鸡蛋 2个', null, '0.01', '0', null, '985', '7', '1528938365', null, null, '59', '0');
 INSERT INTO `product` VALUES ('30', '八宝莲子 200克', null, '0.01', '0', null, '999', '7', '1528938366', null, null, '14', '0');
-INSERT INTO `product` VALUES ('31', '深涧木耳 78克', null, '0.01', '0', null, '999', '7', '1528938367', null, null, '60', '0');
-INSERT INTO `product` VALUES ('32', '土豆 半斤', null, '0.01', '0', null, '999', '3', '1528938368', null, null, '66', '0');
+INSERT INTO `product` VALUES ('31', '深涧木耳 78克', null, '0.01', '0', null, '988', '7', '1528938367', null, null, '60', '0');
+INSERT INTO `product` VALUES ('32', '土豆 半斤', null, '0.01', '0', null, '990', '3', '1528938368', null, null, '66', '0');
 INSERT INTO `product` VALUES ('33', '青椒 半斤', null, '0.01', '0', null, '0', '3', '1528938369', null, null, '67', '0');
 
 -- ----------------------------
@@ -400,13 +432,13 @@ CREATE TABLE `product_property` (
 -- ----------------------------
 -- Records of product_property
 -- ----------------------------
-INSERT INTO `product_property` VALUES (null, null, '1', '500g', '0.10', '8', '11');
-INSERT INTO `product_property` VALUES (null, null, '2', '1000g', '0.10', '111', '11');
+INSERT INTO `product_property` VALUES (null, null, '1', '500g', '0.10', '108', '11');
+INSERT INTO `product_property` VALUES (null, null, '2', '1000g', '0.10', '105', '11');
 INSERT INTO `product_property` VALUES (null, null, '4', '1000g', '1.00', '0', '11');
 INSERT INTO `product_property` VALUES (null, null, '5', '1000g', '1.00', '0', '11');
 INSERT INTO `product_property` VALUES (null, null, '6', '1000g', '1.00', '1', '11');
-INSERT INTO `product_property` VALUES (null, null, '7', '1000g', '1.00', '0', '11');
-INSERT INTO `product_property` VALUES (null, null, '8', '1000g', '11.00', '100', '11');
+INSERT INTO `product_property` VALUES (null, null, '7', '1000g', '1.00', '94', '11');
+INSERT INTO `product_property` VALUES (null, null, '8', '1000g', '11.00', '103', '11');
 
 -- ----------------------------
 -- Table structure for `user`
@@ -452,12 +484,13 @@ CREATE TABLE `user_address` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `user_address_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of user_address
 -- ----------------------------
 INSERT INTO `user_address` VALUES ('1543819189', null, '3', '张三', '020-81167888', '广东省广州市海珠区新港中路397号', '7');
+INSERT INTO `user_address` VALUES ('1544253733', null, '6', '张三', '020-81167888', '广东省广州市海珠区新港中路397号', '1');
 
 -- ----------------------------
 -- Table structure for `user_coupon`
@@ -478,5 +511,5 @@ CREATE TABLE `user_coupon` (
 -- ----------------------------
 -- Records of user_coupon
 -- ----------------------------
-INSERT INTO `user_coupon` VALUES (null, null, '1', '7', '1', '1');
-INSERT INTO `user_coupon` VALUES (null, null, '2', '7', '2', '1');
+INSERT INTO `user_coupon` VALUES (null, null, '1', '1', '1', '1');
+INSERT INTO `user_coupon` VALUES (null, null, '2', '1', '2', '1');
