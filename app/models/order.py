@@ -24,7 +24,7 @@ class Order(Base):
     postage = Column(Integer, default=0)
     remark = Column(String(100))
     transaction_id = Column(String(100))
-    status = Column(SmallInteger, default=1, nullable=False)  # 0: 已关闭 '1:未支付， 2：已支付，3：已发货'
+    status = Column(SmallInteger, default=1, nullable=False)  # 0: 已关闭 '1:未支付， 2：已支付，3：已发货, 4: 已完成'
 
     def keys(self):
         self.append('snap_product')
@@ -137,3 +137,20 @@ class Order(Base):
     def get_user_order(uid):
         with db.auto_commit():
             return Order.query.filter_by(user_id=uid).all()
+
+    @staticmethod
+    def get_user_order_count(uid):
+        with db.auto_commit():
+            orders = Order.query.filter_by(user_id=uid).all()
+        status = {'NOT_PAY': 0, 'SUC_PAY': 0, 'DELIVERY': 0, 'NOT_EST': 0}
+        if orders:
+            for order in orders:
+                if order.status == 1:
+                    status['NOT_PAY'] += 1
+                elif order.status == 2:
+                    status['SUC_PAY'] += 1
+                elif order.status == 3:
+                    status['DELIVERY'] += 1
+                elif order.status == 4:
+                    status['NOT_EST'] += 1
+        return status

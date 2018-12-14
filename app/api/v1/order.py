@@ -1,6 +1,5 @@
 from flask import g, jsonify, request
 from sqlalchemy import and_
-
 from app.libs.error_code import Success, UserException, NotFound
 from app.libs.redprint import RedPrint
 from app.libs.token_auth import auth
@@ -25,6 +24,14 @@ def get_my_order():
     uid = g.user.uid
     order = Order.get_user_order(uid)
     return jsonify(order)
+
+
+@api.route('/count', methods=['GET'])
+@auth.login_required
+def get_my_order_count():
+    uid = g.user.uid
+    order_count = Order.get_user_order_count(uid)
+    return jsonify(order_count)
 
 
 @api.route('/pay/<string:oid>', methods=['GET'])

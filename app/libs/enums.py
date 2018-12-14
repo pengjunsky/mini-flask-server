@@ -14,3 +14,12 @@ class ScopeEnum(Enum):
     User = 1
     Admin = 2
     Super = 3
+
+
+class StatusEnum(Enum):
+    CLOSED = 0
+    NOT_PAY = 1
+    SUC_PAY = 2
+    DELIVERY = 3
+    NOT_EST = 4
+    FINISH = 5
