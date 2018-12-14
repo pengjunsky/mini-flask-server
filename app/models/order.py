@@ -24,7 +24,7 @@ class Order(Base):
     postage = Column(Integer, default=0)
     remark = Column(String(100))
     transaction_id = Column(String(100))
-    status = Column(SmallInteger, default=1, nullable=False)  # '1:未支付， 2：已支付，3：已发货 , 4: 已支付，但库存不足'
+    status = Column(SmallInteger, default=1, nullable=False)  # 0: 已关闭 '1:未支付， 2：已支付，3：已发货'
 
     def keys(self):
         self.append('snap_product')

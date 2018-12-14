@@ -1,5 +1,7 @@
 from flask import g, jsonify, request
-from app.libs.error_code import Success, UserException
+from sqlalchemy import and_
+
+from app.libs.error_code import Success, UserException, NotFound
 from app.libs.redprint import RedPrint
 from app.libs.token_auth import auth
 from app.models.base import db
@@ -52,16 +54,14 @@ def get_pay_query(oid):
 
 @api.route('/pay/close/<string:oid>', methods=['GET', 'POST'])
 def get_pay_close(oid):
-    order_info = OrderQuery(oid).get_order_info()
-    if order_info['result_code'] == 'FAIL':
-        return UserException(msg=order_info['err_code'])
-    elif order_info['trade_state'] == 'CLOSED':
-        return Success(msg=order_info['trade_state_desc'])
+    with db.auto_check_empty(NotFound(msg='订单不存在或已关闭')):
+        order = Order.query.filter(and_(Order.order_no == oid, Order.status == 1)).first_or_404()
     pay_info = CloseOrder(oid).get_close_info()
     if pay_info['result_code'] == 'FAIL':
         return UserException(msg=pay_info['err_code'])
-    order = dict(Order.get_one_order(oid))
-    Order.restore_product_stock(order['snap_product'])
+    Order.restore_product_stock(dict(order)['snap_product'])
+    with db.auto_commit():
+        order.status = 0
     return Success(msg='订单已关闭')
 
 
