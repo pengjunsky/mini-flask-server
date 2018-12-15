@@ -54,4 +54,5 @@ def renew_user():
         user.nickname = form.nickname.data
         user.userPic = form.userPic.data
         user.update()
-    return RenewSuccess()
+    # return RenewSuccess()
+    return jsonify(user)
