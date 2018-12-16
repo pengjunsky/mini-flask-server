@@ -16,9 +16,10 @@ class UserCoupon(Base):
         return self.fields
 
     @staticmethod
-    def get_user_coupon_all(uid):
+    def get_user_coupon_all(uid, count, page):
         current_time = int(int(datetime.now().timestamp()))
-        coupons = UserCoupon.query.filter(and_(UserCoupon.user_id == uid, UserCoupon.status == 1)).all()
+        coupons = UserCoupon.query.filter(and_(UserCoupon.user_id == uid, UserCoupon.status == 1))\
+            .limit(count).offset(page).all()
         user_coupon = []
         for coupon in coupons:
             if coupon.coupon.dead_time > current_time:

@@ -8,15 +8,15 @@ api = RedPrint('product')
 
 @api.route('/recent', methods=['GET', 'POST'])
 def get_recent():
-    count = Count().validate_for_api().count.data
-    products = Product.get_most_recent(count=count)
+    form = Count().validate_for_api()
+    products = Product.get_most_recent(form.count.data, form.page.data)
     return jsonify(products)
 
 
 @api.route('/by_category', methods=['GET', 'POST'])
 def get_all_in_category():
-    id = IDMustBePositiveInt().validate_for_api().id.data
-    products = Product.get_product_by_category_id(id=id)
+    form = IDMustBePositiveInt().validate_for_api()
+    products = Product.get_product_by_category_id(form.id.data, form.count.data, form.page.data)
     return jsonify(products)
 
 

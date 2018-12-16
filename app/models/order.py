@@ -134,9 +134,9 @@ class Order(Base):
             return Order.query.filter_by(order_no=oid).first_or_404()
 
     @staticmethod
-    def get_user_order(uid):
+    def get_user_order(uid, count, page):
         with db.auto_commit():
-            return Order.query.filter_by(user_id=uid).all()
+            return Order.query.filter_by(user_id=uid).limit(count).offset(page).all()
 
     @staticmethod
     def get_user_order_count(uid):

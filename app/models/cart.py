@@ -29,9 +29,9 @@ class Cart(Base):
                 return Product2Property.query.filter_by(id=self.property_id).first_or_404()
 
     @staticmethod
-    def get_cart_by_uid(uid):
+    def get_cart_by_uid(uid, count, page):
         with db.auto_check_empty(NotFound):
-            return Cart.query.filter_by(uid=uid).all()
+            return Cart.query.filter_by(uid=uid).limit(count).offset(page).all()
 
     @staticmethod
     def add_cart(uid, product_id, property_id, qty):

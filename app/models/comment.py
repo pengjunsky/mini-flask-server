@@ -23,6 +23,6 @@ class Comment(Base):
             return User.query.filter_by(id=self.uid).first_or_404().hide('email', 'auth')
 
     @staticmethod
-    def get_comment_by_pid(pid):
+    def get_comment_by_pid(pid, count, page):
         with db.auto_check_empty(NotFound):
-            return Comment.query.filter_by(product_id=pid).all()
+            return Comment.query.filter_by(product_id=pid).limit(count).offset(page).all()

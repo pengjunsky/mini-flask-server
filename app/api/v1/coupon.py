@@ -3,14 +3,15 @@ from app.libs.redprint import RedPrint
 from app.libs.token_auth import auth
 from app.models.coupon import Coupon
 from app.models.user_coupon import UserCoupon
-from app.validators.params import OrderCouponValidator
+from app.validators.params import OrderCouponValidator, Count
 
 api = RedPrint('coupon')
 
 
 @api.route('/all', methods=['GET', 'POST'])
 def get_coupon():
-    coupon = Coupon.get_all_coupon()
+    form = Count().validate_for_api()
+    coupon = Coupon.get_all_coupon(form.count.data, form.page.data)
     return jsonify(coupon)
 
 
@@ -18,7 +19,8 @@ def get_coupon():
 @auth.login_required
 def get_user_coupon():
     uid = g.user.uid
-    coupon = UserCoupon.get_user_coupon_all(uid)
+    form = Count().validate_for_api()
+    coupon = UserCoupon.get_user_coupon_all(uid, form.count.data, form.page.data)
     return jsonify(coupon)
 
 

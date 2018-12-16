@@ -4,7 +4,7 @@ from app.libs.error_code import Success, DeleteSuccess
 from app.libs.redprint import RedPrint
 from app.libs.token_auth import auth
 from app.models.cart import Cart
-from app.validators.params import CartAddValidator, CartIdsValidator
+from app.validators.params import CartAddValidator, CartIdsValidator, Count
 
 api = RedPrint('cart')
 
@@ -13,7 +13,8 @@ api = RedPrint('cart')
 @auth.login_required
 def get_cart():
     uid = g.user.uid
-    carts = Cart.get_cart_by_uid(uid)
+    form = Count().validate_for_api()
+    carts = Cart.get_cart_by_uid(uid, form.count.data, form.page.data )
     return jsonify(carts)
 
 

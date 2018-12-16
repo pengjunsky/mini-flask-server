@@ -11,20 +11,26 @@ from app.models.user_coupon import UserCoupon
 from app.validators.base import BaseValidator
 
 
-class IDMustBePositiveInt(BaseValidator):
+class Count(BaseValidator):
+    count = IntegerField(default=20)
+    page = IntegerField(default=0)
+
+    def validate_count(self, value):
+        if not self.isPositiveInteger(value.data) or not (1 <= int(value.data) <= 20):
+            raise ValidationError(message='count必须是[1, 20]区间内 的正整数')
+
+    def validate_page(self, value):
+        if value.data:
+            if not self.isPositiveInteger(value.data):
+                raise ValidationError(message='page必须是正整数')
+
+
+class IDMustBePositiveInt(Count):
     id = IntegerField(validators=[DataRequired()])
 
     def validate_id(self, value):
         if not self.isPositiveInteger(value.data):
             raise ValidationError(message='id must be positive integer')
-
-
-class Count(BaseValidator):
-    count = IntegerField(default='20')
-
-    def validate_count(self, value):
-        if not self.isPositiveInteger(value.data) or not (1 <= int(value.data) <= 20):
-            raise ValidationError(message='count必须是[1, 20]区间内 的正整数')
 
 
 class CartAddValidator(BaseValidator):

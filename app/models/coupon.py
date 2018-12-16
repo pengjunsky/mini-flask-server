@@ -16,6 +16,6 @@ class Coupon(Base):
     dead_time = Column(Integer, nullable=False)
 
     @staticmethod
-    def get_all_coupon():
+    def get_all_coupon(count, page):
         current_time = int(int(datetime.now().timestamp()))
-        return Coupon.query.filter(Coupon.dead_time > current_time).all()
+        return Coupon.query.filter(Coupon.dead_time > current_time).limit(count).offset(page).all()

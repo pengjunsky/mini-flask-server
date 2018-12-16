@@ -7,7 +7,7 @@ from app.models.base import db
 from app.models.order import Order
 from app.models.user import User
 from app.service.wxpay import UnifiedOrder, OrderQuery, CloseOrder, Base
-from app.validators.params import CreateOrderValidator
+from app.validators.params import CreateOrderValidator, Count
 
 api = RedPrint('order')
 
@@ -18,11 +18,12 @@ def get_one_order(oid):
     return jsonify(order)
 
 
-@api.route('', methods=['GET'])
+@api.route('', methods=['GET', 'POST'])
 @auth.login_required
 def get_my_order():
     uid = g.user.uid
-    order = Order.get_user_order(uid)
+    form = Count().validate_for_api()
+    order = Order.get_user_order(uid, form.count.data, form.page.data)
     return jsonify(order)
 
 

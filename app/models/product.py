@@ -61,16 +61,16 @@ class Product(Base):
         return property
 
     @staticmethod
-    def get_most_recent(count):
+    def get_most_recent(count, page):
         with db.auto_check_empty(ProductException):
-            products = Product.query.order_by(desc(Product.create_time)).limit(count).all()
+            products = Product.query.order_by(desc(Product.create_time)).limit(count).offset(page).all()
             products = [product.hide('postage') for product in products]
             return products
 
     @staticmethod
-    def get_product_by_category_id(id):
+    def get_product_by_category_id(id, count, page):
         with db.auto_check_empty(ProductException):
-            products = Product.query.filter_by(category_id=id).all()
+            products = Product.query.filter_by(category_id=id).limit(count).offset(page).all()
             if products:
                 products = [product.hide('postage') for product in products]
                 return products
