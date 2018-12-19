@@ -27,7 +27,7 @@ class Order(Base):
     status = Column(SmallInteger, default=1, nullable=False)  # 0: 已关闭 '1:未支付， 2：已支付，3：已发货, 4: 待评价, 5: 已完成
 
     def keys(self):
-        self.append('snap_product')
+        self.append('snap_product', 'create_time')
         return self.fields
 
     @property
