@@ -15,7 +15,7 @@ def get_coupon():
     return jsonify(coupon)
 
 
-@api.route('', methods=['GET', 'POST'])
+@api.route('/my', methods=['GET', 'POST'])
 @auth.login_required
 def get_user_coupon():
     uid = g.user.uid

@@ -14,6 +14,7 @@ from app.validators.base import BaseValidator
 class Count(BaseValidator):
     count = IntegerField(default=20)
     page = IntegerField(default=0)
+    type = IntegerField(default=0)
 
     def validate_count(self, value):
         if not self.isPositiveInteger(value.data) or not (1 <= int(value.data) <= 20):
@@ -23,6 +24,11 @@ class Count(BaseValidator):
         if value.data:
             if not self.isPositiveInteger(value.data):
                 raise ValidationError(message='page必须是正整数')
+
+    def validate_type(self, value):
+        if value.data:
+            if not self.isPositiveInteger(value.data):
+                raise ValidationError(message='type必须是正整数')
 
 
 class IDMustBePositiveInt(Count):

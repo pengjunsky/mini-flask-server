@@ -18,12 +18,12 @@ def get_one_order(oid):
     return jsonify(order)
 
 
-@api.route('', methods=['GET', 'POST'])
+@api.route('/my', methods=['GET', 'POST'])
 @auth.login_required
 def get_my_order():
     uid = g.user.uid
     form = Count().validate_for_api()
-    order = Order.get_user_order(uid, form.count.data, form.page.data)
+    order = Order.get_user_order(uid, form.count.data, form.page.data, form.type.data)
     return jsonify(order)
 
 

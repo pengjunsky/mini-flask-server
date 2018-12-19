@@ -24,7 +24,7 @@ class Order(Base):
     postage = Column(Integer, default=0)
     remark = Column(String(100))
     transaction_id = Column(String(100))
-    status = Column(SmallInteger, default=1, nullable=False)  # 0: 已关闭 '1:未支付， 2：已支付，3：已发货, 4: 已完成'
+    status = Column(SmallInteger, default=1, nullable=False)  # 0: 已关闭 '1:未支付， 2：已支付，3：已发货, 4: 待评价, 5: 已完成
 
     def keys(self):
         self.append('snap_product')
@@ -134,9 +134,13 @@ class Order(Base):
             return Order.query.filter_by(order_no=oid).first_or_404()
 
     @staticmethod
-    def get_user_order(uid, count, page):
-        with db.auto_commit():
-            return Order.query.filter_by(user_id=uid).limit(count).offset(page).all()
+    def get_user_order(uid, count, page, type):
+        if not type:
+            with db.auto_commit():
+                return Order.query.filter_by(user_id=uid).limit(count).offset(page).all()
+        else:
+            with db.auto_commit():
+                return Order.query.filter(Order.user_id == uid, Order.status == type).limit(count).offset(page).all()
 
     @staticmethod
     def get_user_order_count(uid):

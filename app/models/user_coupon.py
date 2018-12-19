@@ -28,7 +28,7 @@ class UserCoupon(Base):
 
     @staticmethod
     def get_order_coupon(coupon_ids, uid):
-        user_coupon = UserCoupon.get_user_coupon_all(uid)
+        user_coupon = UserCoupon.get_user_coupon_all(uid, 100, 0)
         coupons = []
         total_price = 0
         for ids in coupon_ids:

@@ -22,7 +22,7 @@ class BaseValidator(Form):
             value = int(value)
         except ValueError:
             return False
-        return True if (isinstance(value, int) and value > 0) else False
+        return True if (isinstance(value, int) and value >= 0) else False
 
     def isPositivePrice(self, value):
         try:
