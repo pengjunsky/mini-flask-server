@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, SmallInteger, and_
+from sqlalchemy import Column, Integer, String, SmallInteger, and_, desc
 from sqlalchemy.dialects.mysql import FLOAT
 from datetime import datetime
 from time import time
@@ -137,10 +137,10 @@ class Order(Base):
     def get_user_order(uid, count, page, type):
         if not type:
             with db.auto_commit():
-                return Order.query.filter_by(user_id=uid).limit(count).offset(page).all()
+                return Order.query.filter_by(user_id=uid).order_by(desc(Order.create_time)).limit(count).offset(page).all()
         else:
             with db.auto_commit():
-                return Order.query.filter(Order.user_id == uid, Order.status == type).limit(count).offset(page).all()
+                return Order.query.filter(Order.user_id == uid, Order.status == type).order_by(desc(Order.create_time)).limit(count).offset(page).all()
 
     @staticmethod
     def get_user_order_count(uid):
