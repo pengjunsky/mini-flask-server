@@ -39,9 +39,9 @@ class Base:
         return str(uuid.uuid4()).replace('-', '')
 
     @staticmethod
-    def process_login_error(wx_result):
+    def process_login_error(msg):
         raise WeChatException(
-            msg=wx_result['return_msg']
+            msg=msg
         )
 
 
@@ -72,7 +72,9 @@ class UnifiedOrder(Base):
         if response:
             wx_result = self.xml_to_dict(response)
             if wx_result.get('return_code') == 'FAIL':
-                self.process_login_error(wx_result)
+                self.process_login_error(wx_result['return_msg'])
+            if wx_result.get('result_code') == 'FAIL':
+                self.process_login_error(wx_result['err_code'])
             else:
                 prepay_id = wx_result.get('prepay_id')
                 pay_sign_data = {
@@ -110,7 +112,7 @@ class OrderQuery(Base):
         if response:
             wx_result = self.xml_to_dict(response)
             if wx_result.get('return_code') == 'FAIL':
-                self.process_login_error(wx_result)
+                self.process_login_error(wx_result['return_msg'])
             else:
                 return wx_result
         else:
@@ -137,7 +139,7 @@ class CloseOrder(Base):
         if response:
             wx_result = self.xml_to_dict(response)
             if wx_result.get('return_code') == 'FAIL':
-                self.process_login_error(wx_result)
+                self.process_login_error(wx_result['return_msg'])
             else:
                 return wx_result
         else:
