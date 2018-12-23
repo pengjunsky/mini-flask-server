@@ -16,6 +16,7 @@ class Order(Base):
     __tablename__ = 'order'
     id = Column(Integer, primary_key=True, autoincrement=True)
     order_no = Column(String(20), unique=True, nullable=False)
+    mail_no = Column(String(20))
     user_id = Column(Integer, nullable=False)
     total_price = Column(FLOAT(precision=6, scale=2), nullable=False)
     pay_price = Column(FLOAT(precision=6, scale=2), nullable=False)
