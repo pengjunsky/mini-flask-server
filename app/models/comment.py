@@ -3,6 +3,7 @@ from sqlalchemy import Column, String, Integer
 from app.libs.error_code import UserException, NotFound
 
 from app.models.base import Base, db
+from app.models.order import Order
 from app.models.user import User
 
 
@@ -26,3 +27,18 @@ class Comment(Base):
     def get_comment_by_pid(pid, count, page):
         with db.auto_check_empty(NotFound):
             return Comment.query.filter_by(product_id=pid).limit(count).offset(page).all()
+
+    @staticmethod
+    def create_by_comment(uid, order_id, comment):
+        for i in comment:
+            with db.auto_commit():
+                comment = Comment()
+                comment.uid = uid
+                comment.type = i['type']
+                comment.content = i['content']
+                comment.product_id = i['product_id']
+                db.session.add(comment)
+        with db.auto_commit():
+            order = Order.query.filter_by(order_no=order_id).first_or_404()
+            order.status = 5
+            order.update()

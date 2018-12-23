@@ -1,9 +1,10 @@
+from sqlalchemy import and_
 from wtforms import IntegerField, StringField
 from wtforms.validators import DataRequired, ValidationError, length
-
 from app.libs.error_code import CartException
 from app.models.base import db
 from app.models.cart import Cart
+from app.models.order import Order
 from app.models.product import Product
 from app.models.product_property import Product2Property
 from app.models.user_address import UserAddress
@@ -157,3 +158,34 @@ class CreateOrderValidator(ProductIdValidator):
             raise ValidationError(message='user_coupon_id must be positive integer')
         if not UserCoupon.query.filter_by(id=value.data).first():
             raise ValidationError(message='the resource are not found')
+
+
+class CreateCommentValidator(BaseValidator):
+    order_id = StringField(validators=[DataRequired()])
+    comment = StringField(validators=[DataRequired()])
+    length = None
+
+    def validate_order_id(self, value):
+        order = Order.query.filter(and_(Order.order_no == value.data, Order.status == 4)).first()
+        if not order:
+            raise ValidationError(message='the resource are not found')
+        self.length = len(order.snap_product)
+
+    def validate_comment(self, value):
+        if not isinstance(value.data, list):
+            raise ValidationError(message='参数不正确')
+        if self.length:
+            if not self.length == len(value.data):
+                raise ValidationError(message='评价条数不正确')
+        for i in value.data:
+            if 'product_id' not in i.keys():
+                raise ValidationError(message='product_id参数不存在')
+            else:
+                if not self.isPositiveInteger(i['product_id']):
+                    raise ValidationError(message='product_id must be positive integer')
+                if not Product.query.filter_by(id=i['product_id']).first():
+                    raise ValidationError(message='the resource are not found')
+            if not (len(i['content']) <= 100):
+                raise ValidationError(message='content最大长度100')
+            if not self.isPositiveInteger(i['type']) or not (1 <= int(i['type']) <= 3):
+                raise ValidationError(message='type必须是[1, 3]区间内 的正整数')
