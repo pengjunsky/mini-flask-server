@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost_3306
-Source Server Version : 50720
+Source Server         : localhost
+Source Server Version : 50505
 Source Host           : localhost:3306
 Source Database       : mall
 
 Target Server Type    : MYSQL
-Target Server Version : 50720
+Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2018-12-23 22:06:41
+Date: 2018-12-25 16:23:36
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -113,10 +113,10 @@ CREATE TABLE `comment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) NOT NULL COMMENT '用户ID',
   `product_id` int(11) NOT NULL COMMENT '商品ID',
-  `content` varchar(100) DEFAULT NULL COMMENT '评论内容',
+  `content` varchar(100) DEFAULT '默认评价' COMMENT '评论内容',
   `type` int(11) DEFAULT NULL COMMENT '评价分类1好评2中评3差评',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of comment
@@ -124,6 +124,17 @@ CREATE TABLE `comment` (
 INSERT INTO `comment` VALUES ('1545573192', null, '1', '1', '11', '你个哈皮', '1');
 INSERT INTO `comment` VALUES ('1545573192', null, '2', '1', '11', 'ddddsdsd', '1');
 INSERT INTO `comment` VALUES ('1545573335', null, '3', '1', '11', 'ddddsdsd', '1');
+INSERT INTO `comment` VALUES ('1545705246', null, '4', '1', '9', '非常愉快的一次购物！', '1');
+INSERT INTO `comment` VALUES ('1545705246', null, '5', '1', '11', '非常愉快的一次购物！', '1');
+INSERT INTO `comment` VALUES ('1545705246', null, '6', '1', '11', '非常愉快的一次购物！', '1');
+INSERT INTO `comment` VALUES ('1545705685', null, '7', '1', '32', '非常愉快的一次购物！', '1');
+INSERT INTO `comment` VALUES ('1545705714', null, '8', '1', '31', '非常愉快的一次购物！', '1');
+INSERT INTO `comment` VALUES ('1545705735', null, '9', '1', '28', '', '1');
+INSERT INTO `comment` VALUES ('1545705829', null, '10', '1', '31', '', '1');
+INSERT INTO `comment` VALUES ('1545705993', null, '11', '1', '31', '', '1');
+INSERT INTO `comment` VALUES ('1545706172', null, '12', '1', '32', '默认评价', '1');
+INSERT INTO `comment` VALUES ('1545726007', null, '13', '1', '20', '非常愉快的一次购物！', '1');
+INSERT INTO `comment` VALUES ('1545726035', null, '14', '1', '28', '非常愉快的一次购物！', '2');
 
 -- ----------------------------
 -- Table structure for `coupon`
@@ -249,7 +260,7 @@ CREATE TABLE `order` (
   `status` smallint(6) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `order_no` (`order_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of order
@@ -269,25 +280,26 @@ INSERT INTO `order` VALUES ('1544514390', null, '30', 'A0XC1199061144514506', nu
 INSERT INTO `order` VALUES ('1544514520', null, '31', 'A0XC1104289444514653', null, '1', '22.00', '19.00', '张三 020-81167888 广东省广州市海珠区新港中路397号', '11.00', '8', null, null, '0');
 INSERT INTO `order` VALUES ('1544578181', null, '32', 'A0XC1251484244578384', null, '1', '22.00', '30.00', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '8', null, null, '0');
 INSERT INTO `order` VALUES ('1544598791', null, '33', 'A0XC1265821944598217', null, '1', '0.01', '0.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, null, '0');
-INSERT INTO `order` VALUES ('1544682886', null, '34', 'A0XC1340023244682271', null, '1', '0.01', '0.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, '4200000233201812130405713980', '2');
+INSERT INTO `order` VALUES ('1544682886', '1545726007', '34', 'A0XC1340023244682271', null, '1', '0.01', '0.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, '4200000233201812130405713980', '5');
 INSERT INTO `order` VALUES ('1544682936', null, '35', 'A0XC1376010044682110', null, '1', '0.01', '0.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, null, '0');
-INSERT INTO `order` VALUES ('1544684263', null, '36', 'A0XC1312917944684601', null, '1', '0.01', '0.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, '4200000231201812132971642022', '2');
+INSERT INTO `order` VALUES ('1544684263', '1545725966', '36', 'A0XC1312917944684601', null, '1', '0.01', '0.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, '4200000231201812132971642022', '4');
 INSERT INTO `order` VALUES ('1544684497', null, '37', 'A0XC1346994344684970', null, '1', '0.01', '0.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, null, '0');
 INSERT INTO `order` VALUES ('1544684552', null, '38', 'A0XC1395552444684992', null, '1', '0.01', '0.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, null, '0');
 INSERT INTO `order` VALUES ('1544684698', null, '39', 'A0XC1367765944684429', null, '1', '0.01', '0.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, null, '0');
-INSERT INTO `order` VALUES ('1545276678', null, '40', 'A0XC2015274645276263', null, '1', '34.01', '29.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '5.00', '0', null, null, '0');
-INSERT INTO `order` VALUES ('1545361753', null, '41', 'A0XC2123428945361229', null, '1', '0.01', '0.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, null, '4');
+INSERT INTO `order` VALUES ('1545276678', '1545705246', '40', 'A0XC2015274645276263', null, '1', '34.01', '29.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '5.00', '0', null, null, '5');
+INSERT INTO `order` VALUES ('1545361753', '1545705829', '41', 'A0XC2123428945361229', null, '1', '0.01', '0.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, null, '5');
 INSERT INTO `order` VALUES ('1545362023', null, '42', 'A0XC2139547745362854', null, '1', '0.01', '0.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, '4200000226201812210126944985', '2');
-INSERT INTO `order` VALUES ('1545362190', null, '43', 'A0XC2134768245362100', null, '1', '0.01', '0.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, '4200000210201812211751365273', '4');
-INSERT INTO `order` VALUES ('1545362238', null, '44', 'A0XC2194571445362578', null, '1', '0.01', '0.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, '4200000236201812210842811407', '2');
+INSERT INTO `order` VALUES ('1545362190', '1545705735', '43', 'A0XC2134768245362100', null, '1', '0.01', '0.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, '4200000210201812211751365273', '5');
+INSERT INTO `order` VALUES ('1545362238', '1545726035', '44', 'A0XC2194571445362578', null, '1', '0.01', '0.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, '4200000236201812210842811407', '5');
 INSERT INTO `order` VALUES ('1545362338', null, '45', 'A0XC2135669945362227', null, '1', '0.01', '0.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, '4200000230201812217473714203', '2');
-INSERT INTO `order` VALUES ('1545363681', '1545462813', '46', 'A0XC2112824645363131', null, '1', '0.01', '0.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, '4200000211201812216104209150', '4');
+INSERT INTO `order` VALUES ('1545363681', '1545705714', '46', 'A0XC2112824645363131', null, '1', '0.01', '0.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, '4200000211201812216104209150', '5');
 INSERT INTO `order` VALUES ('1545364082', null, '47', 'A0XC2118136345364780', null, '1', '0.01', '0.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, '4200000228201812217856948027', '2');
 INSERT INTO `order` VALUES ('1545364298', null, '48', 'A0XC2162096045364107', null, '1', '0.10', '8.10', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '8', null, null, '0');
-INSERT INTO `order` VALUES ('1545364312', '1545462221', '49', 'A0XC2128705045364349', null, '1', '0.01', '0.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, '4200000223201812219020930703', '4');
-INSERT INTO `order` VALUES ('1545364414', '1545573335', '50', 'A0XC2177827545364601', null, '1', '0.01', '0.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, '4200000230201812218240071840', '5');
+INSERT INTO `order` VALUES ('1545364312', '1545706172', '49', 'A0XC2128705045364349', null, '1', '0.01', '0.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, '4200000223201812219020930703', '5');
+INSERT INTO `order` VALUES ('1545364414', '1545705993', '50', 'A0XC2177827545364601', null, '1', '0.01', '0.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, '4200000230201812218240071840', '5');
 INSERT INTO `order` VALUES ('1545445173', null, '51', 'A0XC2201314045445747', null, '1', '0.10', '8.10', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '8', null, null, '0');
-INSERT INTO `order` VALUES ('1545461590', null, '52', 'A0XC2287685245461269', null, '1', '0.01', '0.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, null, '1');
+INSERT INTO `order` VALUES ('1545461590', '1545725367', '52', 'A0XC2287685245461269', null, '1', '0.01', '0.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', null, null, '0');
+INSERT INTO `order` VALUES ('1545726101', null, '53', 'A0XC2568096545726695', null, '1', '0.01', '0.01', '张三 020-81167888 广东省广州市海珠区新港中路397号', '0.00', '0', '快点发哦', null, '1');
 
 -- ----------------------------
 -- Table structure for `order_snap`
@@ -308,7 +320,7 @@ CREATE TABLE `order_snap` (
   PRIMARY KEY (`id`),
   KEY `snap_img_id` (`snap_img_id`),
   CONSTRAINT `order_snap_ibfk_1` FOREIGN KEY (`snap_img_id`) REFERENCES `image` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of order_snap
@@ -352,6 +364,7 @@ INSERT INTO `order_snap` VALUES ('1545364312', null, '64', 'A0XC2128705045364349
 INSERT INTO `order_snap` VALUES ('1545364414', null, '65', 'A0XC2177827545364601', '深涧木耳 78克', '60', '0.01', null, '1', '31', null);
 INSERT INTO `order_snap` VALUES ('1545445173', null, '66', 'A0XC2201314045445747', '贵妃笑 100克贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑贵妃笑', '39', '0.10', '1000g', '1', '11', '2');
 INSERT INTO `order_snap` VALUES ('1545461590', null, '67', 'A0XC2287685245461269', '小明的妙脆角 120克', '52', '0.01', null, '1', '25', null);
+INSERT INTO `order_snap` VALUES ('1545726101', null, '68', 'A0XC2568096545726695', '锈色瓜子 100克', '57', '0.01', null, '1', '27', null);
 
 -- ----------------------------
 -- Table structure for `product`
@@ -400,9 +413,9 @@ INSERT INTO `product` VALUES ('20', '碧螺春 12克*3袋', null, '0.01', '0', n
 INSERT INTO `product` VALUES ('21', '西湖龙井 8克*3袋', null, '0.01', '0', null, '999', '6', '1528938358', null, null, '48', '0');
 INSERT INTO `product` VALUES ('22', '梅兰清花糕 1个', null, '0.01', '0', null, '997', '5', '1528938359', null, null, '54', '0');
 INSERT INTO `product` VALUES ('23', '清凉薄荷糕 1个', null, '0.01', '0', null, '998', '5', '1528938360', null, null, '55', '0');
-INSERT INTO `product` VALUES ('25', '小明的妙脆角 120克', null, '0.01', '0', null, '998', '5', '1528938361', null, null, '52', '0');
+INSERT INTO `product` VALUES ('25', '小明的妙脆角 120克', null, '0.01', '0', null, '999', '5', '1528938361', null, null, '52', '0');
 INSERT INTO `product` VALUES ('26', '红衣青瓜 混搭160克', null, '0.01', '0', null, '995', '2', '1528938362', null, null, '56', '0');
-INSERT INTO `product` VALUES ('27', '锈色瓜子 100克', null, '0.01', '0', null, '995', '4', '1528938363', null, null, '57', '0');
+INSERT INTO `product` VALUES ('27', '锈色瓜子 100克', null, '0.01', '0', null, '994', '4', '1528938363', null, null, '57', '0');
 INSERT INTO `product` VALUES ('28', '春泥花生 200克', null, '0.01', '0', null, '997', '4', '1528938364', null, null, '58', '0');
 INSERT INTO `product` VALUES ('29', '冰心鸡蛋 2个', null, '0.01', '0', null, '983', '7', '1528938365', null, null, '59', '0');
 INSERT INTO `product` VALUES ('30', '八宝莲子 200克', null, '0.01', '0', null, '999', '7', '1528938366', null, null, '14', '0');
@@ -493,7 +506,7 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1539848235', '1545466302', '1', 'oapee4lTOfFg1hpx0lQ5x_HcURUM', null, '〰', 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJDeZwjtt2UHc8OWMm9lu0CE4CaN6zicpKL7nPaUY21FG0micheJXfm3sut4OUmnKt40EO30vQBaW9g/132', '1', null);
+INSERT INTO `user` VALUES ('1539848235', '1545726061', '1', 'oapee4lTOfFg1hpx0lQ5x_HcURUM', null, '〰', 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJDeZwjtt2UHc8OWMm9lu0CE4CaN6zicpKL7nPaUY21FG0micheJXfm3sut4OUmnKt40EO30vQBaW9g/132', '1', null);
 INSERT INTO `user` VALUES ('1539848235', null, '2', null, 'wwe1221@qq.com', 'nihaoe1212', null, '1', 'pbkdf2:sha256:50000$r070DVfB$bbd0d1995a7381c7d5c33cbe8aaa683653b44b3464cea77f4330138095530fce');
 INSERT INTO `user` VALUES ('1540349983', null, '4', null, 'wwe12221@qq.com', 'nihaoe12212', null, '1', 'pbkdf2:sha256:50000$8FLGWA6K$f71dc8cae1ad00cc9ba7bca571400ab40835be02837cf3eb5db9bc9d4f87550b');
 INSERT INTO `user` VALUES ('1540363560', null, '5', null, 'wwe122221@qq.com', 'nihaoe12212', null, '1', 'pbkdf2:sha256:50000$FjAW1u03$cf508e1ff3b562aec3c2eeea6a0bdde4eb678ddd79dba7ae26fbaab49bfd447f');

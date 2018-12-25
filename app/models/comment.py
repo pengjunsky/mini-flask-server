@@ -11,7 +11,7 @@ class Comment(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     uid = Column(Integer, nullable=False)
     product_id = Column(Integer, nullable=False)
-    content = Column(String(100))
+    content = Column(String(100), default='默认评价')
     type = Column(Integer, default=1)  # 1好评 2中评 3差评
 
     def keys(self):
@@ -31,6 +31,10 @@ class Comment(Base):
     @staticmethod
     def create_by_comment(uid, order_id, comment):
         for i in comment:
+            if not i['type']:
+                i['type'] = 1
+            if not i['content']:
+                i['content'] = '默认评价'
             with db.auto_commit():
                 comment = Comment()
                 comment.uid = uid
